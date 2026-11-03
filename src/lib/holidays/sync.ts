@@ -48,7 +48,9 @@ export async function syncHolidays(admin: SupabaseClient, years: number[]): Prom
     await admin.from("settings").update({ holiday_synced_at: now, holiday_sync_error: null }).eq("id", true);
     return { ok: true, years, count: rows.length };
   } catch (e) {
-    const message = e instanceof Error ? e.message : String(e);
+    // Supabase 오류는 Error가 아닌 { code, message } 객체로 온다
+    const message =
+      e instanceof Error ? e.message : typeof e === "object" && e !== null && "message" in e ? `${(e as { code?: string }).code ?? ""} ${String(e.message)}`.trim() : String(e);
     await admin.from("settings").update({ holiday_sync_error: `${now} ${message}` }).eq("id", true);
     return { ok: false, years, count: 0, error: message };
   }
