@@ -51,9 +51,20 @@ npm run build
 
 ## 배포 (Vercel)
 
-1. 저장소를 Vercel에 연결합니다.
-2. Environment Variables에 `.env.example`의 값을 모두 넣습니다. `CRON_SECRET`을 넣으면 Vercel Cron이 이 값으로 인증합니다.
-3. 배포 후 설정·휴일 화면에서 관리자가 **지금 동기화**를 한 번 눌러 공휴일을 받습니다. 이후 매일 03:00(KST)에 자동 동기화됩니다.
+운영 주소: **https://material-order-checklist.vercel.app** (Vercel 프로젝트 `material-order-checklist`, 서울 리전)
+
+1. `vercel login` 후 프로젝트 폴더에서 연결합니다 (처음 한 번).
+   ```bash
+   vercel link --project material-order-checklist
+   ```
+2. Vercel → Settings → Environment Variables (Production)에 `.env.example`의 5개 값을 넣습니다. `CRON_SECRET`이 있어야 Vercel Cron이 인증됩니다.
+   - 비밀 값은 대시보드에서 다시 볼 수 없으므로, 붙여 넣을 때 따옴표·공백이 섞이지 않게 주의합니다. 공휴일 동기화가 `Invalid API key`로 실패하면 `SUPABASE_SECRET_KEY`가 잘못 들어간 것입니다.
+   - `NEXT_PUBLIC_`으로 시작하는 값은 빌드할 때 코드에 들어가므로, 바꾼 뒤에는 **다시 배포**해야 반영됩니다.
+3. 배포합니다. 코드를 바꿀 때마다 같은 명령을 실행합니다.
+   ```bash
+   vercel deploy --prod
+   ```
+4. 설정·휴일 화면에서 관리자가 **공휴일 지금 동기화**를 한 번 누릅니다. 이후 매일 03:00(KST)에 자동으로 동기화됩니다.
 
 ## 운영 메모
 
