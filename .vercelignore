@@ -1,0 +1,7 @@
+# 비밀 값은 올리지 않는다 — 환경변수는 Vercel 대시보드에서 넣는다
+.env*
+!.env.example
+node_modules
+.next
+*.tsbuildinfo
+.claude
