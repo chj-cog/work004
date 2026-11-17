@@ -13,3 +13,7 @@ __pycache__/
 .pytest_cache/
 
 .vercel
+
+# 녹음 파일은 PC에만 둔다 (목소리 비공개)
+poc/data/audio/*
+!poc/data/audio/README.md

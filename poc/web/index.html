@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>말로 들은 재고·일정 → 발주 초안 (PoC)</title>
+<style>
+  :root { --bg:#f6f7f9; --card:#fff; --ink:#1c2430; --sub:#5b6675; --line:#dfe3e8; --accent:#1f6feb; --ok:#1a7f37; --okbg:#e7f5ec; --warn:#9a6700; --warnbg:#fff4d6; --bad:#b42318; --badbg:#fde8e6; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink); font:15px/1.55 "Malgun Gothic","Apple SD Gothic Neo",system-ui,sans-serif; }
+  header { background:var(--card); border-bottom:1px solid var(--line); padding:16px; }
+  header h1 { margin:0; font-size:19px; }
+  header p { margin:4px 0 0; color:var(--sub); font-size:13px; }
+  main { max-width:1100px; margin:0 auto; padding:16px; display:grid; grid-template-columns:minmax(0,1fr); gap:16px; }
+  section { min-width:0;background:var(--card); border:1px solid var(--line); border-radius:10px; padding:16px; }
+  h2 { margin:0 0 10px; font-size:16px; }
+  h3 { margin:14px 0 6px; font-size:14px; color:var(--sub); }
+  .note { color:var(--sub); font-size:13px; margin:6px 0; }
+  .banner { background:var(--badbg); color:var(--bad); border-radius:8px; padding:10px 12px; font-size:14px; }
+  .cols { display:grid; grid-template-columns: minmax(0,1fr) minmax(0,1.2fr); gap:16px; }
+  @media (max-width:800px) { .cols { grid-template-columns: minmax(0,1fr); } }
+  textarea, select, button { font:inherit; }
+  textarea { width:100%; min-height:64px; padding:8px; border:1px solid var(--line); border-radius:8px; resize:vertical; }
+  select { padding:7px 8px; border:1px solid var(--line); border-radius:8px; background:#fff; max-width:100%; }
+  button { padding:8px 14px; border:1px solid var(--accent); background:var(--accent); color:#fff; border-radius:8px; cursor:pointer; }
+  button.ghost { background:#fff; color:var(--accent); }
+  button:disabled { opacity:.5; cursor:wait; }
+  .row { display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin-top:8px; }
+  .list { max-height:330px; overflow:auto; border:1px solid var(--line); border-radius:8px; }
+  .item { padding:7px 10px; border-bottom:1px solid var(--line); cursor:pointer; font-size:14px; }
+  .item:last-child { border-bottom:0; }
+  .item:hover, .item.on { background:#eef4ff; }
+  .item small { color:var(--sub); }
+  .tag { display:inline-block; font-size:12px; padding:1px 7px; border-radius:99px; background:#eef0f3; color:var(--sub); margin-right:4px; }
+  .box { border-radius:8px; padding:10px 12px; margin-top:8px; }
+  .box.ok { background:var(--okbg); color:var(--ok); }
+  .box.warn { background:var(--warnbg); color:var(--warn); }
+  .box.bad { background:var(--badbg); color:var(--bad); }
+  .kv { display:grid; grid-template-columns:110px minmax(0,1fr); gap:4px 10px; font-size:14px; }
+  .kv div:nth-child(odd) { color:var(--sub); }
+  .scroll { overflow-x:auto; }
+  table { border-collapse:collapse; width:100%; font-size:13.5px; }
+  th, td { border-bottom:1px solid var(--line); padding:6px 8px; text-align:left; white-space:nowrap; }
+  th { color:var(--sub); font-weight:600; background:#fafbfc; }
+  td.num { text-align:right; font-variant-numeric:tabular-nums; }
+  tr.pick td { background:#eef4ff; font-weight:600; }
+  .miss { color:var(--bad); font-weight:600; }
+  audio { width:100%; margin-top:8px; }
+  ul { margin:4px 0; padding-left:20px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>말로 들은 재고·일정 → 발주 초안 (PoC)</h1>
+  <p>녹음 → 받아 적기(Whisper) → 정리(LLM, Ollama) → 사람 확인 → 발주 계산. 이 PC 안에서만 돌고, 음성과 글은 밖으로 나가지 않습니다.</p>
+</header>
+<main>
+  <section>
+    <h2>결과 요약 — 성공 기준에 미달</h2>
+    <div class="banner">테스트 발화 30개 기준. 지금 상태로는 "확인 필요"가 붙지 않은 결과도 사람이 확인해야 합니다.</div>
+    <div class="scroll"><table id="goals"></table></div>
+    <p class="note">수작업 기준선(소요 시간 비교)은 아직 측정하지 않았습니다. 발화 문장은 지어낸 것이고 말한 사람은 한 명입니다.</p>
+  </section>
+
+  <section>
+    <h2>직접 돌려 보기</h2>
+    <div class="cols">
+      <div>
+        <h3 style="margin-top:0">① 발화 고르기 (61개)</h3>
+        <div class="row" style="margin-top:0">
+          <select id="filter" aria-label="묶음">
+            <option value="all">전체</option><option value="dev">개발용</option>
+            <option value="test_in">테스트, 범위 안</option><option value="test_out">테스트, 범위 밖</option>
+          </select>
+        </div>
+        <div class="list" id="list" style="margin-top:8px"></div>
+      </div>
+      <div>
+        <h3 style="margin-top:0">② 넣을 글</h3>
+        <textarea id="text" placeholder="직접 써도 됩니다. 예: 다사 재고 3200개입니다"></textarea>
+        <div class="row">
+          <button class="ghost" id="useScript">대본 글 넣기</button>
+          <button class="ghost" id="useHeard">받아 적은 글 넣기</button>
+        </div>
+        <div id="sampleInfo" class="note"></div>
+        <audio id="player" controls hidden></audio>
+        <h3>③ 정리 방식</h3>
+        <select id="method" aria-label="정리 방식">
+          <option value="hybrid">LLM은 뽑기만, 계산·검증은 코드 (선정한 방식)</option>
+          <option value="hybrid2">위 방식 + 더 엄격한 검사 (추가 시도)</option>
+          <option value="rules">규칙 (AI 없음, 기준선)</option>
+          <option value="structured">LLM은 뽑기만 (숫자 보완 없음)</option>
+          <option value="plain">LLM에게 계산까지 맡김</option>
+        </select>
+        <div class="row">
+          <button id="run">글로 실행</button>
+          <button class="ghost" id="runAudio" disabled>녹음을 지금 받아 적어 실행 (느림)</button>
+        </div>
+        <div id="result"></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>기준 상황 (가상의 데이터)</h2>
+    <p class="note" id="today"></p>
+    <div class="cols">
+      <div class="scroll"><table id="materials"></table></div>
+      <div class="scroll"><table id="projects"></table></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>STT 비교 — 핵심어 인식률</h2>
+    <p class="note">대본의 품목 이름, 숫자+단위, 요일 표현 중 받아 적은 글에도 있는 비율. 목표 90%.</p>
+    <div class="scroll"><table id="stt"></table></div>
+  </section>
+
+  <section>
+    <h2>정리 방식 비교</h2>
+    <p class="note">"조용한 오류"는 틀렸는데 "확인 필요"도 붙지 않은 건수입니다. script는 대본 글(STT를 거치지 않음), whisper-…는 받아 적은 글입니다. hybrid2와 cascade는 테스트 결과를 본 뒤에 더한 추가 시도라 공정한 측정이 아닙니다.</p>
+    <div class="scroll"><table id="extraction"></table></div>
+  </section>
+</main>
+
+<script>
+const $ = (id) => document.getElementById(id);
+const esc = (s) => String(s ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const pct = (a, b) => Math.round((a / b) * 100) + "%";
+const SPLIT = { dev: "개발용", test_in: "범위 안", test_out: "범위 밖" };
+const METHOD = { rules: "규칙", plain: "LLM에게 계산까지", structured: "LLM은 뽑기만", hybrid: "뽑기만 + 숫자 보완", hybrid2: "+ 엄격한 검사 (추가 시도)", cascade: "규칙 먼저, 다음 LLM (추가 시도)" };
+let state = null, picked = null;
+
+function recordText(r, names) {
+  if (r.kind === "stock_report") return `재고 보고 · ${names[r.materialId] ?? "?"}(${r.materialId}) · 현재 재고 ${Number(r.qty).toLocaleString()}`;
+  const parts = [];
+  if (r.startDate) parts.push(`생산시작일 ${r.startDate}`);
+  if (r.productionQty != null) parts.push(`생산수량 ${Number(r.productionQty).toLocaleString()}`);
+  return `일정 변경 · ${r.project} · ${parts.join(", ")}`;
+}
+
+function renderList() {
+  const f = $("filter").value;
+  $("list").innerHTML = state.samples.filter((s) => f === "all" || s.split === f).map((s) =>
+    `<div class="item${picked && picked.id === s.id ? " on" : ""}" data-id="${s.id}"><span class="tag">${s.id}</span><span class="tag">${SPLIT[s.split]}</span>${esc(s.text)}<br><small>${esc(s.condition)}</small></div>`).join("");
+}
+
+function pick(id) {
+  picked = state.samples.find((s) => s.id === id);
+  renderList();
+  const names = Object.fromEntries(state.items.materials.map((m) => [m.id, m.name]));
+  const answer = picked.expectedReview ? `확인 필요 (${esc(picked.note)})` : picked.expected.map((r) => esc(recordText(r, names))).join(" / ");
+  $("sampleInfo").innerHTML = `<b>${picked.id}</b> 정답: ${answer}<br>받아 적은 글: ${picked.heard ? esc(picked.heard) : "(없음)"}`;
+  $("text").value = picked.heard || picked.text;
+  $("runAudio").disabled = !picked.hasAudio;
+  const player = $("player");
+  if (picked.hasAudio) { player.src = "/audio/" + picked.id; player.hidden = false; } else { player.hidden = true; player.removeAttribute("src"); }
+  $("result").innerHTML = "";
+}
+
+async function run(useAudio) {
+  const body = { method: $("method").value };
+  if (useAudio) body.audioId = picked.id; else body.text = $("text").value;
+  for (const b of [$("run"), $("runAudio")]) b.disabled = true;
+  $("result").innerHTML = `<div class="box warn">${useAudio ? "받아 적는 중입니다. 처음에는 모델을 불러오느라 1분쯤 걸립니다…" : "정리하는 중…"}</div>`;
+  try {
+    const res = await fetch("/api/run", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
+    const r = await res.json();
+    if (r.error) throw new Error(r.error);
+    if (useAudio) $("text").value = r.text;
+    showResult(r);
+  } catch (e) {
+    $("result").innerHTML = `<div class="box bad">실행하지 못했습니다: ${esc(e.message)}</div>`;
+  } finally {
+    $("run").disabled = false; $("runAudio").disabled = !(picked && picked.hasAudio);
+  }
+}
+
+function showResult(r) {
+  const names = Object.fromEntries(state.items.materials.map((m) => [m.id, m.name]));
+  let html = `<h3>결과</h3><div class="kv"><div>받아 적은 글</div><div>${esc(r.text) || "(비어 있음)"}${r.sttSeconds ? ` <small>(받아 적기 ${r.sttSeconds}초)</small>` : ""}</div><div>정리 결과</div><div>${r.records.length ? r.records.map((x) => esc(recordText(x, names))).join("<br>") : "(없음)"}</div></div>`;
+  if (r.needsReview) {
+    html += `<div class="box warn"><b>확인 필요 — 반영하지 않았습니다.</b> 사람이 확인해서 직접 넣어야 합니다.<ul>${r.reasons.map((x) => `<li>${esc(x)}</li>`).join("")}</ul></div>`;
+  } else {
+    const show = (o) => o.length ? o.map(([d, q]) => `${d} ${Number(q).toLocaleString()}`).join(", ") : "없음";
+    const label = { new: "새로 생김", removed: "없어짐", changed: "바뀜" };
+    html += `<div class="box ok"><b>반영했습니다.</b> ${r.changes.length ? "달라진 발주:" : "발주는 달라지지 않았습니다."}<ul>${r.changes.map((c) => `<li>${esc(c.material)} [${label[c.change]}] ${show(c.before)} → ${show(c.after)}</li>`).join("")}</ul></div>`;
+    html += `<h3>발주 초안</h3><div class="scroll"><table><tr><th>발주일</th><th>부자재</th><th>발주수량</th><th>상태</th></tr>${r.ordersAfter.map((o) => `<tr><td>${o.orderDate}</td><td>${esc(o.material)}</td><td class="num">${o.orderQty.toLocaleString()}</td><td>${esc(o.status)}</td></tr>`).join("")}</table></div>`;
+  }
+  if (picked && (r.text === picked.heard || r.text === picked.text || r.sttSeconds)) {
+    const same = JSON.stringify(norm(r.records)) === JSON.stringify(norm(picked.expected));
+    const good = picked.expectedReview ? r.needsReview : (!r.needsReview && same);
+    const kind = good ? "ok" : (r.needsReview ? "warn" : "bad");
+    const msg = good ? "정답과 같습니다." : (r.needsReview ? "정답과 다르지만 \"확인 필요\"가 붙어 사람에게 넘어갑니다." : "정답과 다른데 \"확인 필요\"가 없습니다 — 모르고 지나가는 오류입니다.");
+    html += `<div class="box ${kind}">${picked.id} 정답과 비교: ${msg}</div>`;
+  }
+  $("result").innerHTML = html;
+}
+
+const norm = (records) => records.map((r) => r.kind === "stock_report" ? ["s", r.materialId, Number(r.qty)] : ["c", r.project, r.startDate ?? null, r.productionQty ?? null]).map((x) => JSON.stringify(x)).sort();
+
+function renderTables() {
+  const picked = state.extraction.find((e) => e.method.startsWith("hybrid@llama") && e.source === state.sttName);
+  const stt = state.stt.find((s) => s.name === state.sttName);
+  const goal = (name, target, value, ok) => `<tr><td>${name}</td><td>${target}</td><td class="${ok ? "" : "miss"}">${value}</td><td class="${ok ? "" : "miss"}">${ok ? "달성" : "미달"}</td></tr>`;
+  if (picked && stt) {
+    const a = picked.test_in, s1 = stt.test_in.hit / stt.test_in.total;
+    $("goals").innerHTML = "<tr><th>지표</th><th>목표</th><th>결과</th><th>판정</th></tr>"
+      + goal("핵심어 인식률 (STT)", "90% 이상", `${pct(stt.test_in.hit, stt.test_in.total)} (${stt.test_in.hit}/${stt.test_in.total})`, s1 >= 0.9)
+      + goal("정리 정확도 (STT + LLM)", "85% 이상", `${pct(a.correct, a.n)} (${a.correct}/${a.n})`, a.accuracy >= 0.85)
+      + goal("발주 판단 일치율", "90% 이상", `${pct(a.ordersMatch, a.n)} (${a.ordersMatch}/${a.n})`, a.ordersMatchRate >= 0.9)
+      + goal("모르고 지나가는 오류", "0건", `${a.silentErrors}건`, a.silentErrors === 0);
+  }
+  $("stt").innerHTML = "<tr><th>모델</th><th>테스트, 범위 안</th><th>범위 밖</th><th>발화당 시간 (CPU)</th></tr>" + state.stt.map((s) =>
+    `<tr class="${s.name === state.sttName ? "pick" : ""}"><td>${esc(s.name.replace("whisper-", "").replace("-hint", " + 품목명 힌트"))}</td><td class="num">${pct(s.test_in.hit, s.test_in.total)}</td><td class="num">${pct(s.test_out.hit, s.test_out.total)}</td><td class="num">${s.seconds.toFixed(1)}초</td></tr>`).join("");
+  $("extraction").innerHTML = "<tr><th>입력</th><th>방식</th><th>LLM</th><th>범위 안 30: 정확도</th><th>발주 일치</th><th>조용한 오류</th><th>확인 필요</th><th>범위 밖 11: 정확도</th><th>조용한 오류</th></tr>" + state.extraction.map((e) => {
+    const [m, model] = e.method.split("@"), a = e.test_in, b = e.test_out;
+    return `<tr class="${e === picked ? "pick" : ""}"><td>${esc(e.source.replace("whisper-", ""))}</td><td>${esc(METHOD[m] ?? m)}</td><td>${esc(model ?? "—")}</td><td class="num">${a.correct}/${a.n} (${pct(a.correct, a.n)})</td><td class="num">${a.ordersMatch}/${a.n}</td><td class="num ${a.silentErrors ? "miss" : ""}">${a.silentErrors}건</td><td class="num">${a.flagged}건</td><td class="num">${b.correct}/${b.n}</td><td class="num ${b.silentErrors ? "miss" : ""}">${b.silentErrors}건</td></tr>`;
+  }).join("");
+  $("today").textContent = `오늘은 ${state.today}(화)로 가정합니다. 모든 품목과 수치는 지어낸 것입니다.`;
+  const packs = Object.fromEntries(state.items.materials.map((m) => [m.id, m]));
+  $("materials").innerHTML = "<tr><th>부자재</th><th>다르게 부르는 이름</th><th>포장</th><th>현재 재고</th><th>발주 단위</th><th>리드타임</th></tr>" + state.scenario.materials.map((m) => {
+    const it = packs[m.id];
+    return `<tr><td>${esc(m.name)}(${m.id})</td><td>${esc(it.aliases.slice(1).join(", "))}</td><td>${it.packs.map((p) => `1${esc(p.unit)} = ${p.qty.toLocaleString()}`).join(", ")}</td><td class="num">${m.stockQty.toLocaleString()}</td><td class="num">${m.orderUnit.toLocaleString()}</td><td class="num">${m.leadTimeBdays}영업일</td></tr>`;
+  }).join("");
+  $("projects").innerHTML = "<tr><th>프로젝트</th><th>부르는 이름</th><th>생산시작일</th><th>생산수량</th></tr>" + state.scenario.projects.map((p) => {
+    const it = state.items.projects.find((x) => x.id === p.id);
+    return `<tr><td>${p.id}</td><td>${esc(it.aliases.join(", "))}</td><td>${p.startDate}</td><td class="num">${p.productionQty.toLocaleString()}</td></tr>`;
+  }).join("");
+}
+
+$("list").addEventListener("click", (e) => { const el = e.target.closest(".item"); if (el) pick(el.dataset.id); });
+$("filter").addEventListener("change", renderList);
+$("useScript").addEventListener("click", () => { if (picked) $("text").value = picked.text; });
+$("useHeard").addEventListener("click", () => { if (picked && picked.heard) $("text").value = picked.heard; });
+$("run").addEventListener("click", () => run(false));
+$("runAudio").addEventListener("click", () => run(true));
+
+fetch("/api/state").then((r) => r.json()).then((s) => { state = s; renderList(); renderTables(); pick("T09"); })
+  .catch((e) => { document.querySelector("main").innerHTML = `<section><div class="banner">불러오지 못했습니다: ${esc(e.message)}</div></section>`; });
+</script>
+</body>
+</html>

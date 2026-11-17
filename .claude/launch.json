@@ -6,6 +6,12 @@
       "runtimeExecutable": "npm",
       "runtimeArgs": ["run", "dev"],
       "port": 3000
+    },
+    {
+      "name": "poc",
+      "runtimeExecutable": "poc/.venv/Scripts/python.exe",
+      "runtimeArgs": ["poc/web/server.py"],
+      "port": 8765
     }
   ]
 }

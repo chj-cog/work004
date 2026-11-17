@@ -1,0 +1,579 @@
+{
+  "method": "hybrid@llama3.1-8b",
+  "source": "whisper-large-v3-turbo",
+  "split": "dev",
+  "summary": {
+    "dev": {
+      "n": 20,
+      "correct": 15,
+      "accuracy": 0.75,
+      "ordersMatch": 16,
+      "ordersMatchRate": 0.8,
+      "silentErrors": 0,
+      "flagged": 6
+    }
+  },
+  "results": [
+    {
+      "id": "D01",
+      "split": "dev",
+      "condition": "재고",
+      "text": "라벨 두 롤 남았어요.",
+      "correct": true,
+      "flagged": false,
+      "silentError": false,
+      "ordersMatch": true,
+      "expected": [
+        {
+          "kind": "stock_report",
+          "materialId": "C",
+          "qty": 2000
+        }
+      ],
+      "expectedReview": false,
+      "predicted": [
+        {
+          "kind": "stock_report",
+          "materialId": "C",
+          "qty": 2000
+        }
+      ],
+      "reasons": [],
+      "input": "라벨 2롤 남았어요",
+      "raw": "{\"entries\": [{\"evidence\": \"라벨 2롤 남았어요\", \"type\": \"stock\", \"target\": \"C\", \"amounts\": [{\"number\": 2, \"unit\": \"롤\"}], \"date\": {\"form\": \"none\", \"month\": null, \"day\": null, \"week\": \"none\", \"weekday\": \"none\", \"shift_days\": null}, \"quantity\": null}]}",
+      "seconds": 4.247
+    },
+    {
+      "id": "D02",
+      "split": "dev",
+      "condition": "재고",
+      "text": "나사 세 박스 있습니다.",
+      "correct": true,
+      "flagged": false,
+      "silentError": false,
+      "ordersMatch": true,
+      "expected": [
+        {
+          "kind": "stock_report",
+          "materialId": "A",
+          "qty": 2400
+        }
+      ],
+      "expectedReview": false,
+      "predicted": [
+        {
+          "kind": "stock_report",
+          "materialId": "A",
+          "qty": 2400
+        }
+      ],
+      "reasons": [],
+      "input": "나사 3박스는 있습니다.",
+      "raw": "{\"entries\": [{\"evidence\": \"나사 3박스\", \"type\": \"stock\", \"target\": \"A\", \"amounts\": [{\"number\": 3, \"unit\": \"박스\"}], \"date\": {\"form\": \"none\", \"month\": null, \"day\": null, \"week\": \"none\", \"weekday\": \"none\", \"shift_days\": null}, \"quantity\": null}]}",
+      "seconds": 4.058
+    },
+    {
+      "id": "D03",
+      "split": "dev",
+      "condition": "재고",
+      "text": "완충재 네 봉지 남았어요.",
+      "correct": true,
+      "flagged": false,
+      "silentError": false,
+      "ordersMatch": true,
+      "expected": [
+        {
+          "kind": "stock_report",
+          "materialId": "D",
+          "qty": 2000
+        }
+      ],
+      "expectedReview": false,
+      "predicted": [
+        {
+          "kind": "stock_report",
+          "materialId": "D",
+          "qty": 2000
+        }
+      ],
+      "reasons": [],
+      "input": "완충제 네 봉지 남았어요",
+      "raw": "{\"entries\": [{\"evidence\": \"완충제 4 봉지\", \"type\": \"stock\", \"target\": \"D\", \"amounts\": [{\"number\": 4, \"unit\": \"봉지\"}], \"date\": {\"form\": \"none\", \"month\": null, \"day\": null, \"week\": \"none\", \"weekday\": \"none\", \"shift_days\": null}, \"quantity\": null}]}",
+      "seconds": 4.135
+    },
+    {
+      "id": "D04",
+      "split": "dev",
+      "condition": "재고",
+      "text": "포장박스 열 묶음 있어요.",
+      "correct": true,
+      "flagged": false,
+      "silentError": false,
+      "ordersMatch": true,
+      "expected": [
+        {
+          "kind": "stock_report",
+          "materialId": "B",
+          "qty": 500
+        }
+      ],
+      "expectedReview": false,
+      "predicted": [
+        {
+          "kind": "stock_report",
+          "materialId": "B",
+          "qty": 500
+        }
+      ],
+      "reasons": [],
+      "input": "포장 박스 열 묶음 있어요",
+      "raw": "{\"entries\": [{\"evidence\": \"포장 박스 10 묶음\", \"type\": \"stock\", \"target\": \"B\", \"amounts\": [{\"number\": 10, \"unit\": \"묶음\"}], \"date\": {\"form\": \"none\", \"month\": null, \"day\": null, \"week\": \"none\", \"weekday\": \"none\", \"shift_days\": null}, \"quantity\": null}]}",
+      "seconds": 4.169
+    },
+    {
+      "id": "D05",
+      "split": "dev",
+      "condition": "재고, 낱개 숫자",
+      "text": "나사 지금 천이백 개 남았습니다.",
+      "correct": true,
+      "flagged": false,
+      "silentError": false,
+      "ordersMatch": true,
+      "expected": [
+        {
+          "kind": "stock_report",
+          "materialId": "A",
+          "qty": 1200
+        }
+      ],
+      "expectedReview": false,
+      "predicted": [
+        {
+          "kind": "stock_report",
+          "materialId": "A",
+          "qty": 1200
+        }
+      ],
+      "reasons": [],
+      "input": "날살 지금 1200개 남았습니다",
+      "raw": "{\"entries\": [{\"evidence\": \"날살 지금 1200개 남았습니다\", \"type\": \"stock\", \"target\": \"A\", \"amounts\": [{\"number\": 1200, \"unit\": \"개\"}], \"date\": {\"form\": \"none\", \"month\": null, \"day\": null, \"week\": \"none\", \"weekday\": \"none\", \"shift_days\": null}, \"quantity\": null}]}",
+      "seconds": 4.168
+    },
+    {
+      "id": "D06",
+      "split": "dev",
+      "condition": "재고, 다른 호칭",
+      "text": "뽁뽁이 한 봉지밖에 없어요.",
+      "correct": false,
+      "flagged": true,
+      "silentError": false,
+      "ordersMatch": true,
+      "expected": [
+        {
+          "kind": "stock_report",
+          "materialId": "D",
+          "qty": 500
+        }
+      ],
+      "expectedReview": false,
+      "predicted": [],
+      "reasons": [
+        "부자재 목록에 없는 품목 (unknown)"
+      ],
+      "input": "떡볶이 한 봉지 밖에 없어요.",
+      "raw": "{\"entries\": [{\"evidence\": \"떡볶이 1 봉지\", \"type\": \"stock\", \"target\": \"unknown\", \"amounts\": [{\"number\": 1, \"unit\": \"봉지\"}], \"date\": {\"form\": \"none\", \"month\": null, \"day\": null, \"week\": \"none\", \"weekday\": \"none\", \"shift_days\": null}, \"quantity\": null}]}",
+      "seconds": 4.144
+    },
+    {
+      "id": "D07",
+      "split": "dev",
+      "condition": "발주 요청 (반영하지 않음)",
+      "text": "나사 두 박스 발주해 주세요.",
+      "correct": true,
+      "flagged": true,
+      "silentError": false,
+      "ordersMatch": true,
+      "expected": [],
+      "expectedReview": true,
+      "predicted": [],
+      "reasons": [
+        "발주 요청으로 보임 (재고·일정 보고가 아님)"
+      ],
+      "input": "나사 2박스 말조해 주세요",
+      "raw": "{\"entries\": [{\"evidence\": \"나사 2박스\", \"type\": \"order_request\", \"target\": \"A\", \"amounts\": [{\"number\": 2, \"unit\": \"박스\"}], \"date\": {\"form\": \"none\", \"month\": null, \"day\": null, \"week\": \"none\", \"weekday\": \"none\", \"shift_days\": null}, \"quantity\": null}]}",
+      "seconds": 4.106
+    },
+    {
+      "id": "D08",
+      "split": "dev",
+      "condition": "재고, 다른 호칭, 반 단위",
+      "text": "스티커 다섯 롤 반 남았어요.",
+      "correct": false,
+      "flagged": true,
+      "silentError": false,
+      "ordersMatch": false,
+      "expected": [
+        {
+          "kind": "stock_report",
+          "materialId": "C",
+          "qty": 5500
+        }
+      ],
+      "expectedReview": false,
+      "predicted": [],
+      "reasons": [
+        "발주 요청으로 보임 (재고·일정 보고가 아님)"
+      ],
+      "input": "",
+      "raw": "{\"entries\": [{\"evidence\": \"\", \"type\": \"order_request\", \"target\": \"A\", \"amounts\": [], \"date\": {\"form\": \"none\", \"month\": null, \"day\": null, \"week\": \"none\", \"weekday\": \"none\", \"shift_days\": null}, \"quantity\": null}]}",
+      "seconds": 3.686
+    },
+    {
+      "id": "D09",
+      "split": "dev",
+      "condition": "일정, 수량",
+      "text": "피원 건 수량이 백오십 개로 늘었습니다.",
+      "correct": true,
+      "flagged": false,
+      "silentError": false,
+      "ordersMatch": true,
+      "expected": [
+        {
+          "kind": "schedule_change",
+          "project": "P1",
+          "productionQty": 150
+        }
+      ],
+      "expectedReview": false,
+      "predicted": [
+        {
+          "kind": "schedule_change",
+          "project": "P1",
+          "productionQty": 150
+        }
+      ],
+      "reasons": [],
+      "input": "피원권 수량이 백오십 개로 늘었습니다",
+      "raw": "{\"entries\": [{\"evidence\": \"피원권 수량이 150 개로 늘었습니다\", \"type\": \"schedule\", \"target\": \"P1\", \"amounts\": [{\"number\": 150, \"unit\": \"개\"}], \"date\": {\"form\": \"none\", \"month\": null, \"day\": null, \"week\": \"none\", \"weekday\": \"none\", \"shift_days\": null}, \"quantity\": 150}]}",
+      "seconds": 4.25
+    },
+    {
+      "id": "D10",
+      "split": "dev",
+      "condition": "일정, 상대 날짜",
+      "text": "피투 건 다음 주 화요일로 당겨졌어요.",
+      "correct": true,
+      "flagged": false,
+      "silentError": false,
+      "ordersMatch": true,
+      "expected": [
+        {
+          "kind": "schedule_change",
+          "project": "P2",
+          "startDate": "2026-11-10"
+        }
+      ],
+      "expectedReview": false,
+      "predicted": [
+        {
+          "kind": "schedule_change",
+          "project": "P2",
+          "startDate": "2026-11-10"
+        }
+      ],
+      "reasons": [],
+      "input": "피토건 다음주 화요일날 당겨졌어요",
+      "raw": "{\"entries\": [{\"evidence\": \"피토건 다음주 화요일날 당겨졌어요\", \"type\": \"schedule\", \"target\": \"P2\", \"amounts\": [], \"date\": {\"form\": \"weekday\", \"month\": null, \"day\": null, \"week\": \"next\", \"weekday\": \"화\", \"shift_days\": null}, \"quantity\": null}]}",
+      "seconds": 3.965
+    },
+    {
+      "id": "D11",
+      "split": "dev",
+      "condition": "일정, 날짜",
+      "text": "피원 생산 시작이 이십사 일로 밀렸어요.",
+      "correct": true,
+      "flagged": false,
+      "silentError": false,
+      "ordersMatch": true,
+      "expected": [
+        {
+          "kind": "schedule_change",
+          "project": "P1",
+          "startDate": "2026-11-24"
+        }
+      ],
+      "expectedReview": false,
+      "predicted": [
+        {
+          "kind": "schedule_change",
+          "project": "P1",
+          "startDate": "2026-11-24"
+        }
+      ],
+      "reasons": [],
+      "input": "T1 생산의 시작이 24일을 늘렸어요.",
+      "raw": "{\"entries\": [{\"evidence\": \"T1 생산의 시작이 24일을 늘렸어요\", \"type\": \"schedule\", \"target\": \"P1\", \"amounts\": [], \"date\": {\"form\": \"day\", \"month\": null, \"day\": 24, \"week\": \"none\", \"weekday\": \"none\", \"shift_days\": null}, \"quantity\": null}]}",
+      "seconds": 3.993
+    },
+    {
+      "id": "D12",
+      "split": "dev",
+      "condition": "일정, 날짜와 수량",
+      "text": "피투는 십이월 일 일 시작으로 바뀌었고 수량은 팔십 개입니다.",
+      "correct": false,
+      "flagged": true,
+      "silentError": false,
+      "ordersMatch": false,
+      "expected": [
+        {
+          "kind": "schedule_change",
+          "project": "P2",
+          "startDate": "2026-12-01",
+          "productionQty": 80
+        }
+      ],
+      "expectedReview": false,
+      "predicted": [],
+      "reasons": [
+        "P2: 글에 없는 수를 적음 (80000, 80000)"
+      ],
+      "input": "P2는 12월 1일 시작으로 바뀌었고 수량은 80K입니다.",
+      "raw": "{\"entries\": [{\"evidence\": \"P2는 12월 1일 시작으로 바뀌었고 수량은 80K\", \"type\": \"schedule\", \"target\": \"P2\", \"amounts\": [{\"number\": 80000, \"unit\": \"개\"}], \"date\": {\"form\": \"month_day\", \"month\": 12, \"day\": 1, \"week\": \"none\", \"weekday\": \"none\", \"shift_days\": null}, \"quantity\": 80000}]}",
+      "seconds": 4.583
+    },
+    {
+      "id": "D13",
+      "split": "dev",
+      "condition": "재고 두 건",
+      "text": "나사는 두 박스, 라벨은 세 롤 남았어요.",
+      "correct": true,
+      "flagged": false,
+      "silentError": false,
+      "ordersMatch": true,
+      "expected": [
+        {
+          "kind": "stock_report",
+          "materialId": "A",
+          "qty": 1600
+        },
+        {
+          "kind": "stock_report",
+          "materialId": "C",
+          "qty": 3000
+        }
+      ],
+      "expectedReview": false,
+      "predicted": [
+        {
+          "kind": "stock_report",
+          "materialId": "A",
+          "qty": 1600
+        },
+        {
+          "kind": "stock_report",
+          "materialId": "C",
+          "qty": 3000
+        }
+      ],
+      "reasons": [],
+      "input": "라사는 2박스, 라벨은 3롤 남았어요.",
+      "raw": "{\"entries\": [{\"evidence\": \"라사는 2박스, 라벨은 3롤 남았어요\", \"type\": \"stock\", \"target\": \"A\", \"amounts\": [{\"number\": 2, \"unit\": \"박스\"}], \"date\": {\"form\": \"none\", \"month\": null, \"day\": null, \"week\": \"none\", \"weekday\": \"none\", \"shift_days\": null}, \"quantity\": null}, {\"evidence\": \"라벨은 3롤 남았어요\", \"type\": \"stock\", \"target\": \"C\", \"amounts\": [{\"number\": 3, \"unit\": \"롤\"}], \"date\": {\"form\": \"none\", \"month\": null, \"day\": null, \"week\": \"none\", \"weekday\": \"none\", \"shift_days\": null}, \"quantity\": null}]}",
+      "seconds": 6.122
+    },
+    {
+      "id": "D14",
+      "split": "dev",
+      "condition": "재고 0",
+      "text": "나사 재고 없습니다. 영 개예요.",
+      "correct": true,
+      "flagged": false,
+      "silentError": false,
+      "ordersMatch": true,
+      "expected": [
+        {
+          "kind": "stock_report",
+          "materialId": "A",
+          "qty": 0
+        }
+      ],
+      "expectedReview": false,
+      "predicted": [
+        {
+          "kind": "stock_report",
+          "materialId": "A",
+          "qty": 0
+        }
+      ],
+      "reasons": [],
+      "input": "나사 재고 없습니다. 빵개에요.",
+      "raw": "{\"entries\": [{\"evidence\": \"나사 재고 없습니다. 빵개에요\", \"type\": \"stock\", \"target\": \"A\", \"amounts\": [{\"number\": 0, \"unit\": \"개\"}], \"date\": {\"form\": \"none\", \"month\": null, \"day\": null, \"week\": \"none\", \"weekday\": \"none\", \"shift_days\": null}, \"quantity\": null}]}",
+      "seconds": 4.159
+    },
+    {
+      "id": "D15",
+      "split": "dev",
+      "condition": "재고, 낱개 숫자",
+      "text": "라벨 재고 확인했는데 이천오백 장입니다.",
+      "correct": false,
+      "flagged": true,
+      "silentError": false,
+      "ordersMatch": false,
+      "expected": [
+        {
+          "kind": "stock_report",
+          "materialId": "C",
+          "qty": 2500
+        }
+      ],
+      "expectedReview": false,
+      "predicted": [],
+      "reasons": [
+        "불확실하다고 표시함: 라벨 예고 확인했는데 2500등"
+      ],
+      "input": "라벨 예고 확인했는데 2500등입니다.",
+      "raw": "{\"entries\": [{\"evidence\": \"라벨 예고 확인했는데 2500등\", \"type\": \"unclear\", \"target\": \"C\", \"amounts\": [], \"date\": {\"form\": \"none\", \"month\": null, \"day\": null, \"week\": \"none\", \"weekday\": \"none\", \"shift_days\": null}, \"quantity\": null}]}",
+      "seconds": 3.951
+    },
+    {
+      "id": "D16",
+      "split": "dev",
+      "condition": "재고, 묶음과 낱개",
+      "text": "포장박스 여섯 묶음하고 낱개 스무 장 있어요.",
+      "correct": true,
+      "flagged": false,
+      "silentError": false,
+      "ordersMatch": true,
+      "expected": [
+        {
+          "kind": "stock_report",
+          "materialId": "B",
+          "qty": 320
+        }
+      ],
+      "expectedReview": false,
+      "predicted": [
+        {
+          "kind": "stock_report",
+          "materialId": "B",
+          "qty": 320
+        }
+      ],
+      "reasons": [],
+      "input": "포장 박스 여섯 묶음하고 낮게 스무 장 있어요.",
+      "raw": "{\"entries\": [{\"evidence\": \"포장 박스 6 묶음하고 낮게 20 장\", \"type\": \"stock\", \"target\": \"B\", \"amounts\": [{\"number\": 6, \"unit\": \"묶음\"}, {\"number\": 20, \"unit\": \"장\"}], \"date\": {\"form\": \"none\", \"month\": null, \"day\": null, \"week\": \"none\", \"weekday\": \"none\", \"shift_days\": null}, \"quantity\": null}]}",
+      "seconds": 4.522
+    },
+    {
+      "id": "D17",
+      "split": "dev",
+      "condition": "일정, 상대 날짜",
+      "text": "피원 건 이번 주 금요일로 앞당겨졌습니다.",
+      "correct": false,
+      "flagged": true,
+      "silentError": false,
+      "ordersMatch": false,
+      "expected": [
+        {
+          "kind": "schedule_change",
+          "project": "P1",
+          "startDate": "2026-11-06"
+        }
+      ],
+      "expectedReview": false,
+      "predicted": [],
+      "reasons": [
+        "프로젝트 목록에 없음 (unknown)"
+      ],
+      "input": "회원권 이번 주 금요일로 압상되었습니다",
+      "raw": "{\"entries\": [{\"evidence\": \"회원권 이번 주 금요일로\", \"type\": \"schedule\", \"target\": \"unknown\", \"amounts\": [], \"date\": {\"form\": \"weekday\", \"month\": null, \"day\": null, \"week\": \"this\", \"weekday\": \"금\", \"shift_days\": null}, \"quantity\": null}]}",
+      "seconds": 3.875
+    },
+    {
+      "id": "D18",
+      "split": "dev",
+      "condition": "재고, 고쳐 말함",
+      "text": "나사 다섯, 아니 네 박스 남았어요.",
+      "correct": true,
+      "flagged": false,
+      "silentError": false,
+      "ordersMatch": true,
+      "expected": [
+        {
+          "kind": "stock_report",
+          "materialId": "A",
+          "qty": 3200
+        }
+      ],
+      "expectedReview": false,
+      "predicted": [
+        {
+          "kind": "stock_report",
+          "materialId": "A",
+          "qty": 3200
+        }
+      ],
+      "reasons": [],
+      "input": "나사 다섯 아니 넷 박스 남았어요",
+      "raw": "{\"entries\": [{\"evidence\": \"나사 다섯 아니 4 박스\", \"type\": \"stock\", \"target\": \"A\", \"amounts\": [{\"number\": 4, \"unit\": \"박스\"}], \"date\": {\"form\": \"none\", \"month\": null, \"day\": null, \"week\": \"none\", \"weekday\": \"none\", \"shift_days\": null}, \"quantity\": null}]}",
+      "seconds": 4.133
+    },
+    {
+      "id": "D19",
+      "split": "dev",
+      "condition": "재고, 다른 호칭, 반 단위",
+      "text": "에어캡 두 봉지 반 있습니다.",
+      "correct": true,
+      "flagged": false,
+      "silentError": false,
+      "ordersMatch": true,
+      "expected": [
+        {
+          "kind": "stock_report",
+          "materialId": "D",
+          "qty": 1250
+        }
+      ],
+      "expectedReview": false,
+      "predicted": [
+        {
+          "kind": "stock_report",
+          "materialId": "D",
+          "qty": 1250
+        }
+      ],
+      "reasons": [],
+      "input": "에어캡 두 봉지 반 있습니다.",
+      "raw": "{\"entries\": [{\"evidence\": \"에어캡 2 봉지 반\", \"type\": \"stock\", \"target\": \"D\", \"amounts\": [{\"number\": 2.5, \"unit\": \"봉지\"}], \"date\": {\"form\": \"none\", \"month\": null, \"day\": null, \"week\": \"none\", \"weekday\": \"none\", \"shift_days\": null}, \"quantity\": null}]}",
+      "seconds": 4.139
+    },
+    {
+      "id": "D20",
+      "split": "dev",
+      "condition": "일정, 수량",
+      "text": "피투 수량 백이십 개로 줄었어요.",
+      "correct": true,
+      "flagged": false,
+      "silentError": false,
+      "ordersMatch": true,
+      "expected": [
+        {
+          "kind": "schedule_change",
+          "project": "P2",
+          "productionQty": 120
+        }
+      ],
+      "expectedReview": false,
+      "predicted": [
+        {
+          "kind": "schedule_change",
+          "project": "P2",
+          "productionQty": 120
+        }
+      ],
+      "reasons": [],
+      "input": "피토 소량 120개로 줄었어요",
+      "raw": "{\"entries\": [{\"evidence\": \"피토 소량 120개로\", \"type\": \"schedule\", \"target\": \"P2\", \"amounts\": [{\"number\": 120, \"unit\": \"개\"}], \"date\": {\"form\": \"none\", \"month\": null, \"day\": null, \"week\": \"none\", \"weekday\": \"none\", \"shift_days\": null}, \"quantity\": 120}]}",
+      "seconds": 4.134
+    }
+  ]
+}

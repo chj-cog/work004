@@ -1,0 +1,37 @@
+{
+  "_comment": "가상의 부자재·프로젝트 목록. 코드와 수치는 data/scenario/base.json 과 같다. 호칭(aliases)은 사람마다 다르게 부르는 이름이고, packs는 포장 단위 하나에 낱개가 몇 개 들어 있는지다.",
+  "materials": [
+    {
+      "id": "A",
+      "name": "나사",
+      "aliases": ["나사", "스크류"],
+      "baseUnits": ["개"],
+      "packs": [{ "unit": "박스", "qty": 800 }]
+    },
+    {
+      "id": "B",
+      "name": "포장박스",
+      "aliases": ["포장박스", "외박스", "큰 박스", "카톤"],
+      "baseUnits": ["장", "개"],
+      "packs": [{ "unit": "묶음", "qty": 50 }]
+    },
+    {
+      "id": "C",
+      "name": "라벨",
+      "aliases": ["라벨", "라벨지", "스티커"],
+      "baseUnits": ["장", "매", "개"],
+      "packs": [{ "unit": "롤", "qty": 1000 }]
+    },
+    {
+      "id": "D",
+      "name": "완충재",
+      "aliases": ["완충재", "뽁뽁이", "에어캡"],
+      "baseUnits": ["개"],
+      "packs": [{ "unit": "봉지", "qty": 500 }]
+    }
+  ],
+  "projects": [
+    { "id": "P1", "aliases": ["P1", "피원"] },
+    { "id": "P2", "aliases": ["P2", "피투"] }
+  ]
+}
