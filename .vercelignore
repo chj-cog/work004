@@ -5,3 +5,5 @@ node_modules
 .next
 *.tsbuildinfo
 .claude
+# PoC(파이썬)는 웹 앱 배포와 무관하다. 녹음(목소리)과 파이썬 환경이 올라가지 않게 뺀다
+poc

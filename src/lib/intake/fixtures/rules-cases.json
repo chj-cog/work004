@@ -1,0 +1,3616 @@
+{
+ "items": {
+  "materials": [
+   {
+    "id": "A",
+    "name": "나사",
+    "aliases": [
+     "나사",
+     "스크류"
+    ],
+    "baseUnits": [
+     "개"
+    ],
+    "packs": [
+     {
+      "unit": "박스",
+      "qty": 800
+     }
+    ]
+   },
+   {
+    "id": "B",
+    "name": "포장박스",
+    "aliases": [
+     "포장박스",
+     "외박스",
+     "큰 박스",
+     "카톤"
+    ],
+    "baseUnits": [
+     "장",
+     "개"
+    ],
+    "packs": [
+     {
+      "unit": "묶음",
+      "qty": 50
+     }
+    ]
+   },
+   {
+    "id": "C",
+    "name": "라벨",
+    "aliases": [
+     "라벨",
+     "라벨지",
+     "스티커"
+    ],
+    "baseUnits": [
+     "장",
+     "매",
+     "개"
+    ],
+    "packs": [
+     {
+      "unit": "롤",
+      "qty": 1000
+     }
+    ]
+   },
+   {
+    "id": "D",
+    "name": "완충재",
+    "aliases": [
+     "완충재",
+     "뽁뽁이",
+     "에어캡"
+    ],
+    "baseUnits": [
+     "개"
+    ],
+    "packs": [
+     {
+      "unit": "봉지",
+      "qty": 500
+     }
+    ]
+   }
+  ],
+  "projects": [
+   {
+    "id": "P1",
+    "name": "P1",
+    "aliases": [
+     "P1",
+     "피원"
+    ]
+   },
+   {
+    "id": "P2",
+    "name": "P2",
+    "aliases": [
+     "P2",
+     "피투"
+    ]
+   }
+  ]
+ },
+ "context": {
+  "today": "2026-11-03",
+  "projectStarts": {
+   "P1": "2026-11-20",
+   "P2": "2026-11-24"
+  }
+ },
+ "cases": [
+  {
+   "text": "라벨 두 롤 남았어요.",
+   "records": [
+    {
+     "kind": "stock_report",
+     "materialId": "C",
+     "qty": 2000
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "나사 세 박스 있습니다.",
+   "records": [
+    {
+     "kind": "stock_report",
+     "materialId": "A",
+     "qty": 2400
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "완충재 네 봉지 남았어요.",
+   "records": [
+    {
+     "kind": "stock_report",
+     "materialId": "D",
+     "qty": 2000
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "포장박스 열 묶음 있어요.",
+   "records": [
+    {
+     "kind": "stock_report",
+     "materialId": "B",
+     "qty": 500
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "나사 지금 천이백 개 남았습니다.",
+   "records": [
+    {
+     "kind": "stock_report",
+     "materialId": "A",
+     "qty": 1200
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "뽁뽁이 한 봉지밖에 없어요.",
+   "records": [
+    {
+     "kind": "stock_report",
+     "materialId": "D",
+     "qty": 500
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "나사 두 박스 발주해 주세요.",
+   "records": [
+    {
+     "kind": "stock_report",
+     "materialId": "A",
+     "qty": 1600
+    }
+   ],
+   "needsReview": true,
+   "reasons": [
+    "발주 요청으로 보임 (재고·일정 보고가 아님)"
+   ]
+  },
+  {
+   "text": "스티커 다섯 롤 반 남았어요.",
+   "records": [
+    {
+     "kind": "stock_report",
+     "materialId": "C",
+     "qty": 5500
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "피원 건 수량이 백오십 개로 늘었습니다.",
+   "records": [
+    {
+     "kind": "schedule_change",
+     "projectId": "P1",
+     "productionQty": 150
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "피투 건 다음 주 화요일로 당겨졌어요.",
+   "records": [
+    {
+     "kind": "schedule_change",
+     "projectId": "P2",
+     "startDate": "2026-11-10"
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "피원 생산 시작이 이십사 일로 밀렸어요.",
+   "records": [
+    {
+     "kind": "schedule_change",
+     "projectId": "P1",
+     "startDate": "2026-11-24"
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "피투는 십이월 일 일 시작으로 바뀌었고 수량은 팔십 개입니다.",
+   "records": [
+    {
+     "kind": "schedule_change",
+     "projectId": "P2",
+     "startDate": "2026-12-01",
+     "productionQty": 80
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "나사는 두 박스, 라벨은 세 롤 남았어요.",
+   "records": [
+    {
+     "kind": "stock_report",
+     "materialId": "A",
+     "qty": 1600
+    },
+    {
+     "kind": "stock_report",
+     "materialId": "C",
+     "qty": 3000
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "나사 재고 없습니다. 영 개예요.",
+   "records": [
+    {
+     "kind": "stock_report",
+     "materialId": "A",
+     "qty": 0
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "라벨 재고 확인했는데 이천오백 장입니다.",
+   "records": [
+    {
+     "kind": "stock_report",
+     "materialId": "C",
+     "qty": 2500
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "포장박스 여섯 묶음하고 낱개 스무 장 있어요.",
+   "records": [
+    {
+     "kind": "stock_report",
+     "materialId": "B",
+     "qty": 320
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "피원 건 이번 주 금요일로 앞당겨졌습니다.",
+   "records": [
+    {
+     "kind": "schedule_change",
+     "projectId": "P1",
+     "startDate": "2026-11-06"
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "나사 다섯, 아니 네 박스 남았어요.",
+   "records": [
+    {
+     "kind": "stock_report",
+     "materialId": "A",
+     "qty": 3200
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "에어캡 두 봉지 반 있습니다.",
+   "records": [
+    {
+     "kind": "stock_report",
+     "materialId": "D",
+     "qty": 1250
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "피투 수량 백이십 개로 줄었어요.",
+   "records": [
+    {
+     "kind": "schedule_change",
+     "projectId": "P2",
+     "productionQty": 120
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "라벨 네 롤 있습니다.",
+   "records": [
+    {
+     "kind": "stock_report",
+     "materialId": "C",
+     "qty": 4000
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "나사 한 박스 남았어요.",
+   "records": [
+    {
+     "kind": "stock_report",
+     "materialId": "A",
+     "qty": 800
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "완충재 여섯 봉지 있어요.",
+   "records": [
+    {
+     "kind": "stock_report",
+     "materialId": "D",
+     "qty": 3000
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "포장박스 열두 묶음 남았습니다.",
+   "records": [
+    {
+     "kind": "stock_report",
+     "materialId": "B",
+     "qty": 600
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "스크류 두 박스 반 있습니다.",
+   "records": [
+    {
+     "kind": "stock_report",
+     "materialId": "A",
+     "qty": 2000
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "라벨지 한 롤밖에 안 남았어요.",
+   "records": [
+    {
+     "kind": "stock_report",
+     "materialId": "C",
+     "qty": 1000
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "카톤 서른 묶음 있어요.",
+   "records": [
+    {
+     "kind": "stock_report",
+     "materialId": "B",
+     "qty": 1500
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "뽁뽁이 세 봉지 남았습니다.",
+   "records": [
+    {
+     "kind": "stock_report",
+     "materialId": "D",
+     "qty": 1500
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "나사 재고 삼천이백 개입니다.",
+   "records": [
+    {
+     "kind": "stock_report",
+     "materialId": "A",
+     "qty": 3200
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "라벨 칠백 장 남았어요.",
+   "records": [
+    {
+     "kind": "stock_report",
+     "materialId": "C",
+     "qty": 700
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "완충재 천 개 있습니다.",
+   "records": [
+    {
+     "kind": "stock_report",
+     "materialId": "D",
+     "qty": 1000
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "포장박스 사백오십 장 있어요.",
+   "records": [
+    {
+     "kind": "stock_report",
+     "materialId": "B",
+     "qty": 450
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "큰 박스 여덟 묶음 남았습니다.",
+   "records": [
+    {
+     "kind": "stock_report",
+     "materialId": "B",
+     "qty": 400
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "스크류 다 떨어졌어요. 하나도 없습니다.",
+   "records": [
+    {
+     "kind": "stock_report",
+     "materialId": "A",
+     "qty": 0
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "나사 여섯 박스, 완충재 두 봉지 있어요.",
+   "records": [
+    {
+     "kind": "stock_report",
+     "materialId": "A",
+     "qty": 4800
+    },
+    {
+     "kind": "stock_report",
+     "materialId": "D",
+     "qty": 1000
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "라벨 세 롤 반, 포장박스 스무 묶음 남았습니다.",
+   "records": [
+    {
+     "kind": "stock_report",
+     "materialId": "C",
+     "qty": 3500
+    },
+    {
+     "kind": "stock_report",
+     "materialId": "B",
+     "qty": 1000
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "스티커 두 롤하고 낱장 삼백 장 있어요.",
+   "records": [
+    {
+     "kind": "stock_report",
+     "materialId": "C",
+     "qty": 2300
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "나사 한 박스 반 남았습니다.",
+   "records": [
+    {
+     "kind": "stock_report",
+     "materialId": "A",
+     "qty": 1200
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "피원 건 수량 이백 개로 늘었어요.",
+   "records": [
+    {
+     "kind": "schedule_change",
+     "projectId": "P1",
+     "productionQty": 200
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "피투 건 수량이 육십 개로 줄었습니다.",
+   "records": [
+    {
+     "kind": "schedule_change",
+     "projectId": "P2",
+     "productionQty": 60
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "피원 생산 시작일이 십이월 이 일로 미뤄졌습니다.",
+   "records": [
+    {
+     "kind": "schedule_change",
+     "projectId": "P1",
+     "startDate": "2026-12-02"
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "피투 건 이번 주 목요일로 당겨졌어요.",
+   "records": [
+    {
+     "kind": "schedule_change",
+     "projectId": "P2",
+     "startDate": "2026-11-05"
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "피원은 다음 주 수요일 시작으로 바뀌었어요.",
+   "records": [
+    {
+     "kind": "schedule_change",
+     "projectId": "P1",
+     "startDate": "2026-11-11"
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "피투 시작이 이십칠 일로 밀렸습니다.",
+   "records": [
+    {
+     "kind": "schedule_change",
+     "projectId": "P2",
+     "startDate": "2026-11-27"
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "피원 건 십일월 십팔 일 시작이고 수량은 백삼십 개로 바뀌었어요.",
+   "records": [
+    {
+     "kind": "schedule_change",
+     "projectId": "P1",
+     "startDate": "2026-11-18",
+     "productionQty": 130
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "피투는 수량 백 개 그대로고 시작만 삼십 일로 밀렸어요.",
+   "records": [
+    {
+     "kind": "schedule_change",
+     "projectId": "P2",
+     "startDate": "2026-11-30"
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "라벨 두 롤 남았고요, 피투 건은 다음 주 월요일로 당겨졌어요.",
+   "records": [
+    {
+     "kind": "stock_report",
+     "materialId": "C",
+     "qty": 2000
+    },
+    {
+     "kind": "schedule_change",
+     "projectId": "P2",
+     "startDate": "2026-11-09"
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "완충재 다섯 봉지 있고 피원 수량은 백십 개로 바뀌었습니다.",
+   "records": [
+    {
+     "kind": "stock_report",
+     "materialId": "D",
+     "qty": 2500
+    },
+    {
+     "kind": "schedule_change",
+     "projectId": "P1",
+     "productionQty": 110
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "외박스 재고는 이백 장입니다.",
+   "records": [
+    {
+     "kind": "stock_report",
+     "materialId": "B",
+     "qty": 200
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "나사 열 박스 있습니다.",
+   "records": [
+    {
+     "kind": "stock_report",
+     "materialId": "A",
+     "qty": 8000
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "라벨 세 롤 남았어요.",
+   "records": [
+    {
+     "kind": "stock_report",
+     "materialId": "C",
+     "qty": 3000
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "나사 두 박스 완충재 한 봉지 포장박스 다섯 묶음 있어요.",
+   "records": [
+    {
+     "kind": "stock_report",
+     "materialId": "A",
+     "qty": 1600
+    },
+    {
+     "kind": "stock_report",
+     "materialId": "D",
+     "qty": 500
+    },
+    {
+     "kind": "stock_report",
+     "materialId": "B",
+     "qty": 250
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "피투 건 다음 주 화요일, 아니 수요일로 당겨졌어요.",
+   "records": [
+    {
+     "kind": "schedule_change",
+     "projectId": "P2",
+     "startDate": "2026-11-11"
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "나사 이삼 박스 정도 남은 것 같아요.",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "어림잡아 말함",
+    "나사: 수량을 숫자로 읽지 못함 (이삼 박스)"
+   ]
+  },
+  {
+   "text": "테이프 열 롤 남았습니다.",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "부자재 목록이나 프로젝트 목록에 있는 이름을 찾지 못함"
+   ]
+  },
+  {
+   "text": "포장박스 열 있어요.",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "포장박스: 수량이나 단위를 찾지 못함"
+   ]
+  },
+  {
+   "text": "피원 건은 저번에 말한 대로 바꿔 주세요.",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "보고가 아니라 부탁하는 말로 보임",
+    "P1: 바뀐 날짜나 수량을 찾지 못함"
+   ]
+  },
+  {
+   "text": "피원 건 일주일 미뤄졌어요.",
+   "records": [
+    {
+     "kind": "schedule_change",
+     "projectId": "P1",
+     "startDate": "2026-11-27"
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "완충재 일곱 봉지 있습니다.",
+   "records": [
+    {
+     "kind": "stock_report",
+     "materialId": "D",
+     "qty": 3500
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "박스 세 박스 남았어요.",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "부자재 목록이나 프로젝트 목록에 있는 이름을 찾지 못함"
+   ]
+  },
+  {
+   "text": "라벨 다섯 롤 주문 넣어 주세요.",
+   "records": [
+    {
+     "kind": "stock_report",
+     "materialId": "C",
+     "qty": 5000
+    }
+   ],
+   "needsReview": true,
+   "reasons": [
+    "발주 요청으로 보임 (재고·일정 보고가 아님)"
+   ]
+  },
+  {
+   "text": "라벨두롤남았어요",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "라벨: 수량이나 단위를 찾지 못함"
+   ]
+  },
+  {
+   "text": "나사가 세 박스고 라벨이 두 롤",
+   "records": [
+    {
+     "kind": "stock_report",
+     "materialId": "A",
+     "qty": 2400
+    },
+    {
+     "kind": "stock_report",
+     "materialId": "C",
+     "qty": 2000
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "피원이 십 일로 밀렸어요",
+   "records": [
+    {
+     "kind": "schedule_change",
+     "projectId": "P1",
+     "startDate": "2026-11-10"
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "나사 1,200개 남았습니다.",
+   "records": [
+    {
+     "kind": "stock_report",
+     "materialId": "A",
+     "qty": 1200
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "P2는 12월 1일 시작으로 바뀌었고 수량은 80개입니다.",
+   "records": [
+    {
+     "kind": "schedule_change",
+     "projectId": "P2",
+     "startDate": "2026-12-01",
+     "productionQty": 80
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "피원 시작이 이 일로 바뀌었어요.",
+   "records": [
+    {
+     "kind": "schedule_change",
+     "projectId": "P1",
+     "startDate": "2026-12-02"
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "피투 건 삼 일 당겨졌어요.",
+   "records": [
+    {
+     "kind": "schedule_change",
+     "projectId": "P2",
+     "startDate": "2026-11-21"
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "나사 세 롤 남았어요.",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "나사: 수량이나 단위를 찾지 못함"
+   ]
+  },
+  {
+   "text": "피원 건 금요일로 바뀌었어요.",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "P1: 어느 주의 금요일인지 알 수 없음"
+   ]
+  },
+  {
+   "text": "피원 시작이 이월 삼십 일로 바뀌었어요.",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "P1: 없는 날짜 (이월 삼십 일)"
+   ]
+  },
+  {
+   "text": "나사 두 박스, 나사 세 박스 있어요.",
+   "records": [
+    {
+     "kind": "stock_report",
+     "materialId": "A",
+     "qty": 1600
+    }
+   ],
+   "needsReview": true,
+   "reasons": [
+    "나사: 한 발화에서 두 번 말함"
+   ]
+  },
+  {
+   "text": "나사 2박스 말조해 주세요",
+   "records": [
+    {
+     "kind": "stock_report",
+     "materialId": "A",
+     "qty": 1600
+    }
+   ],
+   "needsReview": true,
+   "reasons": [
+    "보고가 아니라 부탁하는 말로 보임"
+   ]
+  },
+  {
+   "text": "",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "받아 적은 글이 비어 있음"
+   ]
+  },
+  {
+   "text": "세 박스 남았어요 나사",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "어느 품목의 수량인지 알 수 없는 숫자가 있음",
+    "나사: 수량이나 단위를 찾지 못함"
+   ]
+  },
+  {
+   "text": "피원은 24일 말고 27일로 해 주세요",
+   "records": [
+    {
+     "kind": "schedule_change",
+     "projectId": "P1",
+     "startDate": "2026-11-27"
+    }
+   ],
+   "needsReview": true,
+   "reasons": [
+    "보고가 아니라 부탁하는 말로 보임"
+   ]
+  },
+  {
+   "text": "피원 수량 150으로 늘었어요",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "P1: 수량을 말했지만 읽지 못함"
+   ]
+  },
+  {
+   "text": "나사못 세 박스 있습니다",
+   "records": [
+    {
+     "kind": "stock_report",
+     "materialId": "A",
+     "qty": 2400
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "나사 다섯 박스, 아니 네 박스 남았어요.",
+   "records": [
+    {
+     "kind": "stock_report",
+     "materialId": "A",
+     "qty": 3200
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "큰박스 여덟 묶음 남았습니다.",
+   "records": [
+    {
+     "kind": "stock_report",
+     "materialId": "B",
+     "qty": 400
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "피투 건 다다음 주 월요일로 밀렸어요",
+   "records": [
+    {
+     "kind": "schedule_change",
+     "projectId": "P2",
+     "startDate": "2026-11-16"
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "피원 건 2주 미뤄졌어요",
+   "records": [
+    {
+     "kind": "schedule_change",
+     "projectId": "P1",
+     "startDate": "2026-12-04"
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "라벨 반 롤 남았어요",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "라벨: 수량이나 단위를 찾지 못함"
+   ]
+  },
+  {
+   "text": "나사 만 이천 개 있습니다",
+   "records": [
+    {
+     "kind": "stock_report",
+     "materialId": "A",
+     "qty": 2000
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "완충재 열두 봉지 반 있어요",
+   "records": [
+    {
+     "kind": "stock_report",
+     "materialId": "D",
+     "qty": 6250
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "다들 두로를 남으세요.",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "부자재 목록이나 프로젝트 목록에 있는 이름을 찾지 못함"
+   ]
+  },
+  {
+   "text": "나사 새 버튼에 있습니다",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "나사: 수량이나 단위를 찾지 못함"
+   ]
+  },
+  {
+   "text": "안충지에 내 몽지 남았어요",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "부자재 목록이나 프로젝트 목록에 있는 이름을 찾지 못함"
+   ]
+  },
+  {
+   "text": "포장박스 열무금이 있어요",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "포장박스: 수량이나 단위를 찾지 못함"
+   ]
+  },
+  {
+   "text": "나 살 지금 1,200개 남았습니다.",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "부자재 목록이나 프로젝트 목록에 있는 이름을 찾지 못함"
+   ]
+  },
+  {
+   "text": "복붙이 양보호지 밖에 없어요",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "부자재 목록이나 프로젝트 목록에 있는 이름을 찾지 못함"
+   ]
+  },
+  {
+   "text": "나사 투 박스 말해주세요",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "보고가 아니라 부탁하는 말로 보임",
+    "나사: 수량이나 단위를 찾지 못함"
+   ]
+  },
+  {
+   "text": "스틱커가 다섯 논을 받는 남았어요",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "부자재 목록이나 프로젝트 목록에 있는 이름을 찾지 못함"
+   ]
+  },
+  {
+   "text": "피원건 소량이 150KG로 늘었습니다.",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "P1: 바뀐 날짜나 수량을 찾지 못함"
+   ]
+  },
+  {
+   "text": "피톡건 다음 주 화요일에 담겨줬어요",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "부자재 목록이나 프로젝트 목록에 있는 이름을 찾지 못함"
+   ]
+  },
+  {
+   "text": "원생산이 시작이 24년에 올렸어요.",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "부자재 목록이나 프로젝트 목록에 있는 이름을 찾지 못함"
+   ]
+  },
+  {
+   "text": "비트는 12월 1일 시대학으로 바뀌었고 소량은 80개입니다.",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "부자재 목록이나 프로젝트 목록에 있는 이름을 찾지 못함"
+   ]
+  },
+  {
+   "text": "라사는 독박스 가베린 세로를 남았어요",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "부자재 목록이나 프로젝트 목록에 있는 이름을 찾지 못함"
+   ]
+  },
+  {
+   "text": "다섯 살고 없습니다. 반개예요.",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "부자재 목록이나 프로젝트 목록에 있는 이름을 찾지 못함"
+   ]
+  },
+  {
+   "text": "W와긴 했는데 2500타입니다.",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "부자재 목록이나 프로젝트 목록에 있는 이름을 찾지 못함"
+   ]
+  },
+  {
+   "text": "포장 러프스 여섯먹금하고 낙게 스무장이 있어요",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "부자재 목록이나 프로젝트 목록에 있는 이름을 찾지 못함"
+   ]
+  },
+  {
+   "text": "피곤과는 이번 주 금요일로 상자졌습니다.",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "부자재 목록이나 프로젝트 목록에 있는 이름을 찾지 못함"
+   ]
+  },
+  {
+   "text": "나 사다 사다, 아니 내 박스 남았어요",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "나사: 수량이나 단위를 찾지 못함"
+   ]
+  },
+  {
+   "text": "에어캡 두 봉줄 많이 씁니다",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "완충재: 수량이나 단위를 찾지 못함"
+   ]
+  },
+  {
+   "text": "기투 소량 120개로 줄었어요",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "부자재 목록이나 프로젝트 목록에 있는 이름을 찾지 못함"
+   ]
+  },
+  {
+   "text": "러벨 대로 뵙습니다",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "부자재 목록이나 프로젝트 목록에 있는 이름을 찾지 못함"
+   ]
+  },
+  {
+   "text": "다사한 박스 남았어요",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "부자재 목록이나 프로젝트 목록에 있는 이름을 찾지 못함"
+   ]
+  },
+  {
+   "text": "원총진이어서 공지했어요",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "부자재 목록이나 프로젝트 목록에 있는 이름을 찾지 못함"
+   ]
+  },
+  {
+   "text": "포장 박스 열두 묶어 남았습니다.",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "포장박스: 수량이나 단위를 찾지 못함"
+   ]
+  },
+  {
+   "text": "스크류 두박스 반 있습니다.",
+   "records": [
+    {
+     "kind": "stock_report",
+     "materialId": "A",
+     "qty": 2000
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "라벨지한 놀 밖에 안 남았어요",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "라벨: 수량이나 단위를 찾지 못함"
+   ]
+  },
+  {
+   "text": "카톤 서른 묶음이 있어요",
+   "records": [
+    {
+     "kind": "stock_report",
+     "materialId": "B",
+     "qty": 1500
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "복뽁이 새 봉지 남았습니다.",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "부자재 목록이나 프로젝트 목록에 있는 이름을 찾지 못함"
+   ]
+  },
+  {
+   "text": "다사 제공 3200개입니다.",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "부자재 목록이나 프로젝트 목록에 있는 이름을 찾지 못함"
+   ]
+  },
+  {
+   "text": "답을 700장 남았어요",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "부자재 목록이나 프로젝트 목록에 있는 이름을 찾지 못함"
+   ]
+  },
+  {
+   "text": "원툭제에 정개 있습니다.",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "부자재 목록이나 프로젝트 목록에 있는 이름을 찾지 못함"
+   ]
+  },
+  {
+   "text": "포장 박스 450장 있어요",
+   "records": [
+    {
+     "kind": "stock_report",
+     "materialId": "B",
+     "qty": 450
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "컴퍽스 여전히 묶은 남았습니다.",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "부자재 목록이나 프로젝트 목록에 있는 이름을 찾지 못함"
+   ]
+  },
+  {
+   "text": "다사 6박스 완충제 투봉지 있어요",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "부자재 목록이나 프로젝트 목록에 있는 이름을 찾지 못함"
+   ]
+  },
+  {
+   "text": "라벨의 새골 반, 포장벅스 숨음을 끝 남았습니다.",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "라벨: 수량이나 단위를 찾지 못함"
+   ]
+  },
+  {
+   "text": "스티컷 도로랑 호원화창 산부창이 있어요",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "부자재 목록이나 프로젝트 목록에 있는 이름을 찾지 못함"
+   ]
+  },
+  {
+   "text": "아사 한 박습 안 남았습니다.",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "부자재 목록이나 프로젝트 목록에 있는 이름을 찾지 못함"
+   ]
+  },
+  {
+   "text": "P1건 수량 200K로 들었어요",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "P1: 수량을 말했지만 읽지 못함"
+   ]
+  },
+  {
+   "text": "P2건 수량이 60개를 줄었습니다.",
+   "records": [
+    {
+     "kind": "schedule_change",
+     "projectId": "P2",
+     "productionQty": 60
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "p1 생산시탁일은 12월 2일로 밀어졌습니다.",
+   "records": [
+    {
+     "kind": "schedule_change",
+     "projectId": "P1",
+     "startDate": "2026-12-02"
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "피톡컨 2번째 목울로 당겨졌어요",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "부자재 목록이나 프로젝트 목록에 있는 이름을 찾지 못함"
+   ]
+  },
+  {
+   "text": "P1은 다음 주 수요일 시력으로 바뀌었어요",
+   "records": [
+    {
+     "kind": "schedule_change",
+     "projectId": "P1",
+     "startDate": "2026-11-11"
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "피투 시력이 27일로 밀렸습니다.",
+   "records": [
+    {
+     "kind": "schedule_change",
+     "projectId": "P2",
+     "startDate": "2026-11-27"
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "p1컨 11월 18일 시작이고 소량은 130K로 바뀌었어요",
+   "records": [
+    {
+     "kind": "schedule_change",
+     "projectId": "P1",
+     "startDate": "2026-11-18"
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "피투는 수령팩에 그대로고 시장만 30일만 밀렸어요",
+   "records": [
+    {
+     "kind": "schedule_change",
+     "projectId": "P2",
+     "startDate": "2026-11-30"
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "라벨 2를 남았고요. 피투 꺼는 다음 지 오래로 단계했어요.",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "라벨: 수량이나 단위를 찾지 못함",
+    "P2: 바뀐 날짜나 수량을 찾지 못함"
+   ]
+  },
+  {
+   "text": "완충제 5봉지 있고 피원수량은 110개로 바뀌었습니다.",
+   "records": [
+    {
+     "kind": "schedule_change",
+     "projectId": "P1",
+     "productionQty": 110
+    }
+   ],
+   "needsReview": true,
+   "reasons": [
+    "어느 품목의 수량인지 알 수 없는 숫자가 있음"
+   ]
+  },
+  {
+   "text": "외박스 제거는 이외장입니다.",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "포장박스: 수량이나 단위를 찾지 못함"
+   ]
+  },
+  {
+   "text": "나사 열 박수 있습니다.",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "나사: 수량이나 단위를 찾지 못함"
+   ]
+  },
+  {
+   "text": "앞에서 일어났어요",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "부자재 목록이나 프로젝트 목록에 있는 이름을 찾지 못함"
+   ]
+  },
+  {
+   "text": "두 박스 만 중지 한 봉지 포장 박스 다 사먹고 있어요",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "어느 품목의 수량인지 알 수 없는 숫자가 있음",
+    "포장박스: 수량이나 단위를 찾지 못함"
+   ]
+  },
+  {
+   "text": "비툭한 다음 좋아해요. 아니 수요일로 당겨졌어요.",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "부자재 목록이나 프로젝트 목록에 있는 이름을 찾지 못함"
+   ]
+  },
+  {
+   "text": "다사 2, 3박 수정도 남은 것 같아요",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "어림잡아 말함",
+    "부자재 목록이나 프로젝트 목록에 있는 이름을 찾지 못함"
+   ]
+  },
+  {
+   "text": "테이프 연롤 남았습니다.",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "부자재 목록이나 프로젝트 목록에 있는 이름을 찾지 못함"
+   ]
+  },
+  {
+   "text": "포장 박스 열이 있어요",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "포장박스: 수량이나 단위를 찾지 못함"
+   ]
+  },
+  {
+   "text": "P1 꺼는 저번에 말한 대로 바꿔주세요",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "보고가 아니라 부탁하는 말로 보임",
+    "P1: 바뀐 날짜나 수량을 찾지 못함"
+   ]
+  },
+  {
+   "text": "피원권 1주일 미뤄졌어요",
+   "records": [
+    {
+     "kind": "schedule_change",
+     "projectId": "P1",
+     "startDate": "2026-11-27"
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "악수 3박스 남았어요",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "부자재 목록이나 프로젝트 목록에 있는 이름을 찾지 못함"
+   ]
+  },
+  {
+   "text": "라벨 다섯 논쯤은 넣어주세요",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "보고가 아니라 부탁하는 말로 보임",
+    "어림잡아 말함",
+    "라벨: 수량이나 단위를 찾지 못함"
+   ]
+  },
+  {
+   "text": "라벨 2롤 남았어요.",
+   "records": [
+    {
+     "kind": "stock_report",
+     "materialId": "C",
+     "qty": 2000
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "나사 3박스는 있습니다.",
+   "records": [
+    {
+     "kind": "stock_report",
+     "materialId": "A",
+     "qty": 2400
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "나사 지금 1200개 남았습니다.",
+   "records": [
+    {
+     "kind": "stock_report",
+     "materialId": "A",
+     "qty": 1200
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "품목이 한 봉지 밖에 없어요.",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "부자재 목록이나 프로젝트 목록에 있는 이름을 찾지 못함"
+   ]
+  },
+  {
+   "text": "나사 2박스 말조해 주세요.",
+   "records": [
+    {
+     "kind": "stock_report",
+     "materialId": "A",
+     "qty": 1600
+    }
+   ],
+   "needsReview": true,
+   "reasons": [
+    "보고가 아니라 부탁하는 말로 보임"
+   ]
+  },
+  {
+   "text": "피원권 수량이 백오십 개로 늘었습니다.",
+   "records": [
+    {
+     "kind": "schedule_change",
+     "projectId": "P1",
+     "productionQty": 150
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "피투 건 다음주 화요일날 당겨졌어요.",
+   "records": [
+    {
+     "kind": "schedule_change",
+     "projectId": "P2",
+     "startDate": "2026-11-10"
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "피원 생산의 시작이 24일을 늘렸어요.",
+   "records": [
+    {
+     "kind": "schedule_change",
+     "projectId": "P1",
+     "startDate": "2026-11-24"
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "피투는 12월 1일 시작으로 바뀌었고 수량은 80K입니다.",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "P2: 수량을 말했지만 읽지 못함"
+   ]
+  },
+  {
+   "text": "라사는 2박스, 라벨은 3롤 남았어요.",
+   "records": [
+    {
+     "kind": "stock_report",
+     "materialId": "C",
+     "qty": 3000
+    }
+   ],
+   "needsReview": true,
+   "reasons": [
+    "어느 품목의 수량인지 알 수 없는 숫자가 있음"
+   ]
+  },
+  {
+   "text": "나사 재고 없습니다. 빵개예요.",
+   "records": [
+    {
+     "kind": "stock_report",
+     "materialId": "A",
+     "qty": 0
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "라벨 예고 확인했는데 2,500등입니다.",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "라벨: 수량이나 단위를 찾지 못함"
+   ]
+  },
+  {
+   "text": "포장박스 여섯 묶음하고 낮게 스무 장 있어요.",
+   "records": [
+    {
+     "kind": "stock_report",
+     "materialId": "B",
+     "qty": 320
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "피원권 이번 주 금요일로 압상되었습니다.",
+   "records": [
+    {
+     "kind": "schedule_change",
+     "projectId": "P1",
+     "startDate": "2026-11-06"
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "나사 다섯 아니 넷 박스 남았어요.",
+   "records": [
+    {
+     "kind": "stock_report",
+     "materialId": "A",
+     "qty": 3200
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "피투 수량 120개로 줄었어요.",
+   "records": [
+    {
+     "kind": "schedule_change",
+     "projectId": "P2",
+     "productionQty": 120
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "라벨 뇌롤이 있습니다.",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "라벨: 수량이나 단위를 찾지 못함"
+   ]
+  },
+  {
+   "text": "다사, 한 박스 남았어요.",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "부자재 목록이나 프로젝트 목록에 있는 이름을 찾지 못함"
+   ]
+  },
+  {
+   "text": "포장박스 12묶음 남았습니다.",
+   "records": [
+    {
+     "kind": "stock_report",
+     "materialId": "B",
+     "qty": 600
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "라벨지, 한 롤 밖에 안 남았어요.",
+   "records": [
+    {
+     "kind": "stock_report",
+     "materialId": "C",
+     "qty": 1000
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "퍽퍽이 3봉지 남았습니다.",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "부자재 목록이나 프로젝트 목록에 있는 이름을 찾지 못함"
+   ]
+  },
+  {
+   "text": "다사 재고 3200개입니다.",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "부자재 목록이나 프로젝트 목록에 있는 이름을 찾지 못함"
+   ]
+  },
+  {
+   "text": "타벨 700장 남았어요. 감사합니다.",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "부자재 목록이나 프로젝트 목록에 있는 이름을 찾지 못함"
+   ]
+  },
+  {
+   "text": "완충재 1,000개 있습니다.",
+   "records": [
+    {
+     "kind": "stock_report",
+     "materialId": "D",
+     "qty": 1000
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "포장박스 450장 있어요.",
+   "records": [
+    {
+     "kind": "stock_report",
+     "materialId": "B",
+     "qty": 450
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "큰 박스 8묶음 남았습니다.",
+   "records": [
+    {
+     "kind": "stock_report",
+     "materialId": "B",
+     "qty": 400
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "라벨 세로 반, 포장박스 스무 묶음 남았습니다.",
+   "records": [
+    {
+     "kind": "stock_report",
+     "materialId": "B",
+     "qty": 1000
+    }
+   ],
+   "needsReview": true,
+   "reasons": [
+    "라벨: 수량이나 단위를 찾지 못함"
+   ]
+  },
+  {
+   "text": "스티커 들어오라고 낮장 300장 있어요. 감사합니다.",
+   "records": [
+    {
+     "kind": "stock_report",
+     "materialId": "C",
+     "qty": 300
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "피원 건 수량 200개로 늘어졌어요.",
+   "records": [
+    {
+     "kind": "schedule_change",
+     "projectId": "P1",
+     "productionQty": 200
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "피투 건 수량이 60개로 줄었습니다.",
+   "records": [
+    {
+     "kind": "schedule_change",
+     "projectId": "P2",
+     "productionQty": 60
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "피원 생산 시작일이 12월 2일로 미뤄졌습니다.",
+   "records": [
+    {
+     "kind": "schedule_change",
+     "projectId": "P1",
+     "startDate": "2026-12-02"
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "피투 시작이 이십 칠 일로 밀렸습니다.",
+   "records": [
+    {
+     "kind": "schedule_change",
+     "projectId": "P2",
+     "startDate": "2026-11-07"
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "피원 건 11월 18일 시작이고 수량은 130개로 바뀌었어요. 감사합니다.",
+   "records": [
+    {
+     "kind": "schedule_change",
+     "projectId": "P1",
+     "startDate": "2026-11-18",
+     "productionQty": 130
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "피투는 수량 100개 그대로고 시작만 30일로 밀렸어요.",
+   "records": [
+    {
+     "kind": "schedule_change",
+     "projectId": "P2",
+     "startDate": "2026-11-30"
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "라벨 2월 남았고요. 피투과는 다음 주 월요일로 당겨졌어요. 감사합니다.",
+   "records": [
+    {
+     "kind": "schedule_change",
+     "projectId": "P2",
+     "startDate": "2026-11-09"
+    }
+   ],
+   "needsReview": true,
+   "reasons": [
+    "라벨: 수량이나 단위를 찾지 못함"
+   ]
+  },
+  {
+   "text": "완충재 다섯 봉지 있고 피원 수량은 백십 킬로 바뀌었습니다. 감사합니다.",
+   "records": [
+    {
+     "kind": "stock_report",
+     "materialId": "D",
+     "qty": 2500
+    }
+   ],
+   "needsReview": true,
+   "reasons": [
+    "P1: 수량을 말했지만 읽지 못함"
+   ]
+  },
+  {
+   "text": "웹 박스 재고는 200장입니다.",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "부자재 목록이나 프로젝트 목록에 있는 이름을 찾지 못함"
+   ]
+  },
+  {
+   "text": "배세로 남았어요.",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "부자재 목록이나 프로젝트 목록에 있는 이름을 찾지 못함"
+   ]
+  },
+  {
+   "text": "두 박스, 완충재 한 봉지, 포장박스 다섯 모금 있어요.",
+   "records": [
+    {
+     "kind": "stock_report",
+     "materialId": "D",
+     "qty": 500
+    }
+   ],
+   "needsReview": true,
+   "reasons": [
+    "어느 품목의 수량인지 알 수 없는 숫자가 있음",
+    "포장박스: 수량이나 단위를 찾지 못함"
+   ]
+  },
+  {
+   "text": "피투건 다음 주 화요일, 아니 수요일로 당겨졌어요.",
+   "records": [
+    {
+     "kind": "schedule_change",
+     "projectId": "P2",
+     "startDate": "2026-11-11"
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "다사, 이, 삼 박스 정도 남은 거 같아요.",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "어림잡아 말함",
+    "부자재 목록이나 프로젝트 목록에 있는 이름을 찾지 못함"
+   ]
+  },
+  {
+   "text": "테이프 열롤 남았습니다.",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "부자재 목록이나 프로젝트 목록에 있는 이름을 찾지 못함"
+   ]
+  },
+  {
+   "text": "피원 꺼는 저번에 말한 대로 바꿔주세요.",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "보고가 아니라 부탁하는 말로 보임",
+    "P1: 바뀐 날짜나 수량을 찾지 못함"
+   ]
+  },
+  {
+   "text": "피원권 일주일 미뤄졌어요.",
+   "records": [
+    {
+     "kind": "schedule_change",
+     "projectId": "P1",
+     "startDate": "2026-11-27"
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "라벨 다섯 롤쯤은 넣어주세요.",
+   "records": [
+    {
+     "kind": "stock_report",
+     "materialId": "C",
+     "qty": 5000
+    }
+   ],
+   "needsReview": true,
+   "reasons": [
+    "보고가 아니라 부탁하는 말로 보임",
+    "어림잡아 말함"
+   ]
+  },
+  {
+   "text": "라벨 2롤 남았어요",
+   "records": [
+    {
+     "kind": "stock_report",
+     "materialId": "C",
+     "qty": 2000
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "완충제 네 봉지 남았어요",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "부자재 목록이나 프로젝트 목록에 있는 이름을 찾지 못함"
+   ]
+  },
+  {
+   "text": "포장 박스 열 묶음 있어요",
+   "records": [
+    {
+     "kind": "stock_report",
+     "materialId": "B",
+     "qty": 500
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "날살 지금 1200개 남았습니다",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "부자재 목록이나 프로젝트 목록에 있는 이름을 찾지 못함"
+   ]
+  },
+  {
+   "text": "떡볶이 한 봉지 밖에 없어요.",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "부자재 목록이나 프로젝트 목록에 있는 이름을 찾지 못함"
+   ]
+  },
+  {
+   "text": "피원권 수량이 백오십 개로 늘었습니다",
+   "records": [
+    {
+     "kind": "schedule_change",
+     "projectId": "P1",
+     "productionQty": 150
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "피토건 다음주 화요일날 당겨졌어요",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "부자재 목록이나 프로젝트 목록에 있는 이름을 찾지 못함"
+   ]
+  },
+  {
+   "text": "T1 생산의 시작이 24일을 늘렸어요.",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "부자재 목록이나 프로젝트 목록에 있는 이름을 찾지 못함"
+   ]
+  },
+  {
+   "text": "P2는 12월 1일 시작으로 바뀌었고 수량은 80K입니다.",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "P2: 수량을 말했지만 읽지 못함"
+   ]
+  },
+  {
+   "text": "나사 재고 없습니다. 빵개에요.",
+   "records": [
+    {
+     "kind": "stock_report",
+     "materialId": "A",
+     "qty": 0
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "라벨 예고 확인했는데 2500등입니다.",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "라벨: 수량이나 단위를 찾지 못함"
+   ]
+  },
+  {
+   "text": "포장 박스 여섯 묶음하고 낮게 스무 장 있어요.",
+   "records": [
+    {
+     "kind": "stock_report",
+     "materialId": "B",
+     "qty": 320
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "회원권 이번 주 금요일로 압상되었습니다",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "부자재 목록이나 프로젝트 목록에 있는 이름을 찾지 못함"
+   ]
+  },
+  {
+   "text": "나사 다섯 아니 넷 박스 남았어요",
+   "records": [
+    {
+     "kind": "stock_report",
+     "materialId": "A",
+     "qty": 3200
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "피토 소량 120개로 줄었어요",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "부자재 목록이나 프로젝트 목록에 있는 이름을 찾지 못함"
+   ]
+  },
+  {
+   "text": "라벨대로 리스입니다.",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "라벨: 수량이나 단위를 찾지 못함"
+   ]
+  },
+  {
+   "text": "다 사은 박스 남았어요.",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "부자재 목록이나 프로젝트 목록에 있는 이름을 찾지 못함"
+   ]
+  },
+  {
+   "text": "원충재 여섯 봉지 있어요.",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "부자재 목록이나 프로젝트 목록에 있는 이름을 찾지 못함"
+   ]
+  },
+  {
+   "text": "레벨지에 한 롤 밖에 안 남았어요.",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "부자재 목록이나 프로젝트 목록에 있는 이름을 찾지 못함"
+   ]
+  },
+  {
+   "text": "뽁뽁이 3봉지 남았습니다.",
+   "records": [
+    {
+     "kind": "stock_report",
+     "materialId": "D",
+     "qty": 1500
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "타벨 700장 남았어요.",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "부자재 목록이나 프로젝트 목록에 있는 이름을 찾지 못함"
+   ]
+  },
+  {
+   "text": "원춘제 1,000개 있습니다.",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "부자재 목록이나 프로젝트 목록에 있는 이름을 찾지 못함"
+   ]
+  },
+  {
+   "text": "포장박스 450장 있어요",
+   "records": [
+    {
+     "kind": "stock_report",
+     "materialId": "B",
+     "qty": 450
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "스크류 다 떨어졌어요 하나도 없습니다",
+   "records": [
+    {
+     "kind": "stock_report",
+     "materialId": "A",
+     "qty": 0
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "나사 여섯 박스 완충재 두 봉지 있어요.",
+   "records": [
+    {
+     "kind": "stock_report",
+     "materialId": "A",
+     "qty": 4800
+    },
+    {
+     "kind": "stock_report",
+     "materialId": "D",
+     "qty": 1000
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "라벨 세로 반 포장박스 스무 묶음 남았습니다.",
+   "records": [
+    {
+     "kind": "stock_report",
+     "materialId": "B",
+     "qty": 1000
+    }
+   ],
+   "needsReview": true,
+   "reasons": [
+    "라벨: 수량이나 단위를 찾지 못함"
+   ]
+  },
+  {
+   "text": "스티커 들어오라고 낮장 300장 있어요.",
+   "records": [
+    {
+     "kind": "stock_report",
+     "materialId": "C",
+     "qty": 300
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "아사 한 박스 반 남았습니다.",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "부자재 목록이나 프로젝트 목록에 있는 이름을 찾지 못함"
+   ]
+  },
+  {
+   "text": "P1 건 수량이 200개로 늘어졌어요.",
+   "records": [
+    {
+     "kind": "schedule_change",
+     "projectId": "P1",
+     "productionQty": 200
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "P2건 수량이 60개로 줄었습니다.",
+   "records": [
+    {
+     "kind": "schedule_change",
+     "projectId": "P2",
+     "productionQty": 60
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "피투건 이번 주 목요일로 당겨졌어요.",
+   "records": [
+    {
+     "kind": "schedule_change",
+     "projectId": "P2",
+     "startDate": "2026-11-05"
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "피투 시작이 27일로 밀렸습니다.",
+   "records": [
+    {
+     "kind": "schedule_change",
+     "projectId": "P2",
+     "startDate": "2026-11-27"
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "P2는 수량 100개 그대로고 시작만 30일로 밀렸어요.",
+   "records": [
+    {
+     "kind": "schedule_change",
+     "projectId": "P2",
+     "startDate": "2026-11-30"
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "라벨 둘 월 남았고요. 피투권은 다음 주 월요일로 당겨졌어요.",
+   "records": [
+    {
+     "kind": "schedule_change",
+     "projectId": "P2",
+     "startDate": "2026-11-09"
+    }
+   ],
+   "needsReview": true,
+   "reasons": [
+    "라벨: 수량이나 단위를 찾지 못함"
+   ]
+  },
+  {
+   "text": "완충제 다섯 봉지 있고 피곤 수량은 백십 킬로 바뀌었습니다.",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "부자재 목록이나 프로젝트 목록에 있는 이름을 찾지 못함"
+   ]
+  },
+  {
+   "text": "웹박스 재고는 200장입니다.",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "부자재 목록이나 프로젝트 목록에 있는 이름을 찾지 못함"
+   ]
+  },
+  {
+   "text": "앞에 새로 남았어요.",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "부자재 목록이나 프로젝트 목록에 있는 이름을 찾지 못함"
+   ]
+  },
+  {
+   "text": "두 박스, 완충재 한 봉지, 포장 박스 다섯 모금 있어요.",
+   "records": [
+    {
+     "kind": "stock_report",
+     "materialId": "D",
+     "qty": 500
+    }
+   ],
+   "needsReview": true,
+   "reasons": [
+    "어느 품목의 수량인지 알 수 없는 숫자가 있음",
+    "포장박스: 수량이나 단위를 찾지 못함"
+   ]
+  },
+  {
+   "text": "비투건 다음주 화요일 아니 수요일로 당겨졌어요",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "부자재 목록이나 프로젝트 목록에 있는 이름을 찾지 못함"
+   ]
+  },
+  {
+   "text": "다사 2 3 박스 정도 남은 거 같아요.",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "어림잡아 말함",
+    "부자재 목록이나 프로젝트 목록에 있는 이름을 찾지 못함"
+   ]
+  },
+  {
+   "text": "포장 박스 열 있어요.",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "포장박스: 수량이나 단위를 찾지 못함"
+   ]
+  },
+  {
+   "text": "P1 꺼는 저번에 말한 대로 바꿔주세요.",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "보고가 아니라 부탁하는 말로 보임",
+    "P1: 바뀐 날짜나 수량을 찾지 못함"
+   ]
+  },
+  {
+   "text": "완충제 7공제 있습니다",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "부자재 목록이나 프로젝트 목록에 있는 이름을 찾지 못함"
+   ]
+  },
+  {
+   "text": "박스 3박스 남았어요",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "부자재 목록이나 프로젝트 목록에 있는 이름을 찾지 못함"
+   ]
+  },
+  {
+   "text": "나사 세 파트는 있습니다.",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "나사: 수량이나 단위를 찾지 못함"
+   ]
+  },
+  {
+   "text": "완충재 4봉지 남았어요.",
+   "records": [
+    {
+     "kind": "stock_report",
+     "materialId": "D",
+     "qty": 2000
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "포장박스 열 묶음이 있어요.",
+   "records": [
+    {
+     "kind": "stock_report",
+     "materialId": "B",
+     "qty": 500
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "나사 1200개 남았습니다.",
+   "records": [
+    {
+     "kind": "stock_report",
+     "materialId": "A",
+     "qty": 1200
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "뽁뽁이 한 봉지 밖에 없어요.",
+   "records": [
+    {
+     "kind": "stock_report",
+     "materialId": "D",
+     "qty": 500
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "나사, 툭박스, 말쪄해주세요.",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "보고가 아니라 부탁하는 말로 보임",
+    "나사: 수량이나 단위를 찾지 못함"
+   ]
+  },
+  {
+   "text": "스티커 5롤 반 남았어요.",
+   "records": [
+    {
+     "kind": "stock_report",
+     "materialId": "C",
+     "qty": 5500
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "피원 건 수량이 150kg이로 늘었습니다.",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "P1: 수량을 말했지만 읽지 못함"
+   ]
+  },
+  {
+   "text": "피투 건 다음 주 화요일에 당겨졌어요.",
+   "records": [
+    {
+     "kind": "schedule_change",
+     "projectId": "P2",
+     "startDate": "2026-11-10"
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "피원 생산이 시작이 24일 늘렸어요.",
+   "records": [
+    {
+     "kind": "schedule_change",
+     "projectId": "P1",
+     "startDate": "2026-11-24"
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "피투는 12월 1일 시작으로 바뀌었고 수령은 80개입니다.",
+   "records": [
+    {
+     "kind": "schedule_change",
+     "projectId": "P2",
+     "startDate": "2026-12-01",
+     "productionQty": 80
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "라사는 두 박스, 라벨은 세 롤 남았어요.",
+   "records": [
+    {
+     "kind": "stock_report",
+     "materialId": "C",
+     "qty": 3000
+    }
+   ],
+   "needsReview": true,
+   "reasons": [
+    "어느 품목의 수량인지 알 수 없는 숫자가 있음"
+   ]
+  },
+  {
+   "text": "나사 재고 없습니다. 반개예요.",
+   "records": [
+    {
+     "kind": "stock_report",
+     "materialId": "A",
+     "qty": 0
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "라벨 재고 확인했는데 2,500점입니다.",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "라벨: 수량이나 단위를 찾지 못함"
+   ]
+  },
+  {
+   "text": "포장박스, 여산 묶음하고 낫게 20장 있어요.",
+   "records": [
+    {
+     "kind": "stock_report",
+     "materialId": "B",
+     "qty": 20
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "피원권 2번 주 금요일로 앞상되었습니다.",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "P1: 어느 주의 금요일인지 알 수 없음"
+   ]
+  },
+  {
+   "text": "나사 다섯? 아니, 네 박스 남았어요.",
+   "records": [
+    {
+     "kind": "stock_report",
+     "materialId": "A",
+     "qty": 3200
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "에어캡 두 봉지 많이 씁니다.",
+   "records": [
+    {
+     "kind": "stock_report",
+     "materialId": "D",
+     "qty": 1000
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "피투 소량 120개로 줄었어요.",
+   "records": [
+    {
+     "kind": "schedule_change",
+     "projectId": "P2",
+     "productionQty": 120
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "라벨데롤 있습니다.",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "라벨: 수량이나 단위를 찾지 못함"
+   ]
+  },
+  {
+   "text": "다사 한 박스 남았어요.",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "부자재 목록이나 프로젝트 목록에 있는 이름을 찾지 못함"
+   ]
+  },
+  {
+   "text": "완충재 6봉지 있어요.",
+   "records": [
+    {
+     "kind": "stock_report",
+     "materialId": "D",
+     "qty": 3000
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "포장박스 12목검 남았습니다.",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "포장박스: 수량이나 단위를 찾지 못함"
+   ]
+  },
+  {
+   "text": "스크류, 투박스, 반이 있습니다.",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "나사: 수량이나 단위를 찾지 못함"
+   ]
+  },
+  {
+   "text": "라벨지 한 롤 밖에 안 남았어요.",
+   "records": [
+    {
+     "kind": "stock_report",
+     "materialId": "C",
+     "qty": 1000
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "나사 재고 3200개입니다.",
+   "records": [
+    {
+     "kind": "stock_report",
+     "materialId": "A",
+     "qty": 3200
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "라벨 700장 남았어요.",
+   "records": [
+    {
+     "kind": "stock_report",
+     "materialId": "C",
+     "qty": 700
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "큰 박스 8개의 묶음이 남았습니다.",
+   "records": [
+    {
+     "kind": "stock_report",
+     "materialId": "B",
+     "qty": 8
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "나사 6박스, 완충재, 두 봉지 있어요.",
+   "records": [
+    {
+     "kind": "stock_report",
+     "materialId": "A",
+     "qty": 4800
+    },
+    {
+     "kind": "stock_report",
+     "materialId": "D",
+     "qty": 1000
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "라벨 새롤반, 포장박스, 스무 묶음 남았습니다.",
+   "records": [
+    {
+     "kind": "stock_report",
+     "materialId": "B",
+     "qty": 1000
+    }
+   ],
+   "needsReview": true,
+   "reasons": [
+    "라벨: 수량이나 단위를 찾지 못함"
+   ]
+  },
+  {
+   "text": "스티커드로라고 나창삼부창 있어요.",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "라벨: 수량이나 단위를 찾지 못함"
+   ]
+  },
+  {
+   "text": "나사, 한 박스 반 남았습니다.",
+   "records": [
+    {
+     "kind": "stock_report",
+     "materialId": "A",
+     "qty": 1200
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "피원 건 수량이 200개로 늘어졌어요.",
+   "records": [
+    {
+     "kind": "schedule_change",
+     "projectId": "P1",
+     "productionQty": 200
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "피투권 수량이 60개로 줄었습니다.",
+   "records": [
+    {
+     "kind": "schedule_change",
+     "projectId": "P2",
+     "productionQty": 60
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "피투 건 이번 주 무구일로 당겨졌어요.",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "P2: 날짜를 읽지 못함"
+   ]
+  },
+  {
+   "text": "피원컨 11월 18일 시작이고 수량은 130km 바뀌었어요.",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "P1: 수량을 말했지만 읽지 못함"
+   ]
+  },
+  {
+   "text": "피투는 수령 100개 그대로고 시작만 30일로 밀렸어요.",
+   "records": [
+    {
+     "kind": "schedule_change",
+     "projectId": "P2",
+     "startDate": "2026-11-30"
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "라벨 2로 남았고요. 피투꺼는 다음 주 5렬로 당겨졌어요.",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "라벨: 수량이나 단위를 찾지 못함",
+    "P2: 바뀐 날짜나 수량을 찾지 못함"
+   ]
+  },
+  {
+   "text": "완충재 5봉지 있고 피원수량은 110개로 바뀌었습니다.",
+   "records": [
+    {
+     "kind": "stock_report",
+     "materialId": "D",
+     "qty": 2500
+    },
+    {
+     "kind": "schedule_change",
+     "projectId": "P1",
+     "productionQty": 110
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "외박스 재고는 200장입니다.",
+   "records": [
+    {
+     "kind": "stock_report",
+     "materialId": "B",
+     "qty": 200
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "나사 10박스 있습니다.",
+   "records": [
+    {
+     "kind": "stock_report",
+     "materialId": "A",
+     "qty": 8000
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "포장박스, 완충재 한 봉지, 포장박스 다섯 먹고 있어요.",
+   "records": [
+    {
+     "kind": "stock_report",
+     "materialId": "D",
+     "qty": 500
+    }
+   ],
+   "needsReview": true,
+   "reasons": [
+    "포장박스: 수량이나 단위를 찾지 못함",
+    "포장박스: 한 발화에서 두 번 말함"
+   ]
+  },
+  {
+   "text": "피투권, 다음 조화일, 아니 수요일로 당겨졌어요.",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "P2: 어느 주의 수요일인지 알 수 없음"
+   ]
+  },
+  {
+   "text": "4, 4, 2, 3 박스 정도 남은 것 같아요.",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "어림잡아 말함",
+    "부자재 목록이나 프로젝트 목록에 있는 이름을 찾지 못함"
+   ]
+  },
+  {
+   "text": "완충재, 뽁뽁지 있습니다.",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "완충재: 수량이나 단위를 찾지 못함"
+   ]
+  },
+  {
+   "text": "박스 3박스 남았어요.",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "부자재 목록이나 프로젝트 목록에 있는 이름을 찾지 못함"
+   ]
+  },
+  {
+   "text": "라벨 5롤 좀 넣어주세요.",
+   "records": [
+    {
+     "kind": "stock_report",
+     "materialId": "C",
+     "qty": 5000
+    }
+   ],
+   "needsReview": true,
+   "reasons": [
+    "보고가 아니라 부탁하는 말로 보임"
+   ]
+  },
+  {
+   "text": "다들 두롤 남았어요",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "부자재 목록이나 프로젝트 목록에 있는 이름을 찾지 못함"
+   ]
+  },
+  {
+   "text": "나사셋버튼은 있습니다.",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "나사: 수량이나 단위를 찾지 못함"
+   ]
+  },
+  {
+   "text": "완충지에 4봉지 남았어요",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "부자재 목록이나 프로젝트 목록에 있는 이름을 찾지 못함"
+   ]
+  },
+  {
+   "text": "포장박스 열무꿈이 있어요",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "포장박스: 수량이나 단위를 찾지 못함"
+   ]
+  },
+  {
+   "text": "낯설 지금 1200개 남았습니다",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "부자재 목록이나 프로젝트 목록에 있는 이름을 찾지 못함"
+   ]
+  },
+  {
+   "text": "뽁뽁이 한 바퀴밖에 없어요",
+   "records": [
+    {
+     "kind": "stock_report",
+     "materialId": "D",
+     "qty": 0
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "낙사 툭박스 말쬐해주세요",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "보고가 아니라 부탁하는 말로 보임",
+    "부자재 목록이나 프로젝트 목록에 있는 이름을 찾지 못함"
+   ]
+  },
+  {
+   "text": "스티커 5롤 반 남았어요",
+   "records": [
+    {
+     "kind": "stock_report",
+     "materialId": "C",
+     "qty": 5500
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "P1건 수량이 150개로 늘었습니다.",
+   "records": [
+    {
+     "kind": "schedule_change",
+     "projectId": "P1",
+     "productionQty": 150
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "P2건 다음 주 화요일날 당겨졌어요",
+   "records": [
+    {
+     "kind": "schedule_change",
+     "projectId": "P2",
+     "startDate": "2026-11-10"
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "태원 생산이 시작이 24일 늘렸어요",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "부자재 목록이나 프로젝트 목록에 있는 이름을 찾지 못함"
+   ]
+  },
+  {
+   "text": "P2는 12월 1일 시작으로 바뀌었고 수령은 80개입니다.",
+   "records": [
+    {
+     "kind": "schedule_change",
+     "projectId": "P2",
+     "startDate": "2026-12-01",
+     "productionQty": 80
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "라사는 2박스, 바벨은 3홀 남았어요",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "부자재 목록이나 프로젝트 목록에 있는 이름을 찾지 못함"
+   ]
+  },
+  {
+   "text": "다사 재고 없습니다. 반계예요.",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "부자재 목록이나 프로젝트 목록에 있는 이름을 찾지 못함"
+   ]
+  },
+  {
+   "text": "랩을 대고 확인했는데 2,500점입니다.",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "부자재 목록이나 프로젝트 목록에 있는 이름을 찾지 못함"
+   ]
+  },
+  {
+   "text": "포장박스 여성목금하고 낮게 20장 있어요",
+   "records": [
+    {
+     "kind": "stock_report",
+     "materialId": "B",
+     "qty": 20
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "Q1권 2번 주 금요일로 앞상되었습니다.",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "부자재 목록이나 프로젝트 목록에 있는 이름을 찾지 못함"
+   ]
+  },
+  {
+   "text": "나 사 다섯 아니 넷박스 남았어요",
+   "records": [
+    {
+     "kind": "stock_report",
+     "materialId": "A",
+     "qty": 3200
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "에어캡 두 봉지 많이 씁니다",
+   "records": [
+    {
+     "kind": "stock_report",
+     "materialId": "D",
+     "qty": 1000
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "뒤통수량 120개로 줄었어요",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "부자재 목록이나 프로젝트 목록에 있는 이름을 찾지 못함"
+   ]
+  },
+  {
+   "text": "다사암박스 남았어요",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "부자재 목록이나 프로젝트 목록에 있는 이름을 찾지 못함"
+   ]
+  },
+  {
+   "text": "원총지 여섯봉지 있어요",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "부자재 목록이나 프로젝트 목록에 있는 이름을 찾지 못함"
+   ]
+  },
+  {
+   "text": "포장 박스 12목검 남았습니다.",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "포장박스: 수량이나 단위를 찾지 못함"
+   ]
+  },
+  {
+   "text": "스크류 2박스 반 있습니다",
+   "records": [
+    {
+     "kind": "stock_report",
+     "materialId": "A",
+     "qty": 2000
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "레벨지 한 러로밖에 안 남았어요.",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "부자재 목록이나 프로젝트 목록에 있는 이름을 찾지 못함"
+   ]
+  },
+  {
+   "text": "카톤 서른 묶음 있어요",
+   "records": [
+    {
+     "kind": "stock_report",
+     "materialId": "B",
+     "qty": 1500
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "퍽퍽이 3번지 남았습니다.",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "부자재 목록이나 프로젝트 목록에 있는 이름을 찾지 못함"
+   ]
+  },
+  {
+   "text": "다사 제고 3,200개입니다.",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "부자재 목록이나 프로젝트 목록에 있는 이름을 찾지 못함"
+   ]
+  },
+  {
+   "text": "다벨 700장 남았어요",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "부자재 목록이나 프로젝트 목록에 있는 이름을 찾지 못함"
+   ]
+  },
+  {
+   "text": "완춘제 청계 있습니다.",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "부자재 목록이나 프로젝트 목록에 있는 이름을 찾지 못함"
+   ]
+  },
+  {
+   "text": "포장 박스 450장이 있어요",
+   "records": [
+    {
+     "kind": "stock_report",
+     "materialId": "B",
+     "qty": 450
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "큰 박스 8금 남았습니다.",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "포장박스: 수량이나 단위를 찾지 못함"
+   ]
+  },
+  {
+   "text": "나사 여섯 박스 완충제 두 봉지 있어요",
+   "records": [
+    {
+     "kind": "stock_report",
+     "materialId": "A",
+     "qty": 4800
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "라벨 새롤반 포장박스 20금 남았습니다",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "라벨: 수량이나 단위를 찾지 못함",
+    "포장박스: 수량이나 단위를 찾지 못함"
+   ]
+  },
+  {
+   "text": "스티커드로라고 나창삼부창 있어요",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "라벨: 수량이나 단위를 찾지 못함"
+   ]
+  },
+  {
+   "text": "P1건 수량이 200개로 늘어졌어요",
+   "records": [
+    {
+     "kind": "schedule_change",
+     "projectId": "P1",
+     "productionQty": 200
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "P1 생산시락일이 12월 2일로 미뤄졌습니다.",
+   "records": [
+    {
+     "kind": "schedule_change",
+     "projectId": "P1",
+     "startDate": "2026-12-02"
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "피토컨 이번 주 무구일로 당겨졌어요.",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "부자재 목록이나 프로젝트 목록에 있는 이름을 찾지 못함"
+   ]
+  },
+  {
+   "text": "P1은 다음 주 수요일 시작으로 바뀌었어요.",
+   "records": [
+    {
+     "kind": "schedule_change",
+     "projectId": "P1",
+     "startDate": "2026-11-11"
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "피토 시작이 27일로 밀렸습니다.",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "부자재 목록이나 프로젝트 목록에 있는 이름을 찾지 못함"
+   ]
+  },
+  {
+   "text": "P1컨 11월 18일 시작이고 수량은 130km 바뀌었어요.",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "P1: 수량을 말했지만 읽지 못함"
+   ]
+  },
+  {
+   "text": "라벨 2롤 남았고요. P2꺼는 다음 주 5렐로 당겨졌어요.",
+   "records": [
+    {
+     "kind": "stock_report",
+     "materialId": "C",
+     "qty": 2000
+    }
+   ],
+   "needsReview": true,
+   "reasons": [
+    "P2: 바뀐 날짜나 수량을 찾지 못함"
+   ]
+  },
+  {
+   "text": "환충제에 5봉지 있고 피원수량은 110개로 바뀌었습니다.",
+   "records": [
+    {
+     "kind": "schedule_change",
+     "projectId": "P1",
+     "productionQty": 110
+    }
+   ],
+   "needsReview": true,
+   "reasons": [
+    "어느 품목의 수량인지 알 수 없는 숫자가 있음"
+   ]
+  },
+  {
+   "text": "웹박스 제거는 200장입니다.",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "부자재 목록이나 프로젝트 목록에 있는 이름을 찾지 못함"
+   ]
+  },
+  {
+   "text": "옆에 새로 남았어요",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "부자재 목록이나 프로젝트 목록에 있는 이름을 찾지 못함"
+   ]
+  },
+  {
+   "text": "두 박스 안중지 한 봉지에 포장 박스 다섯 먹고 있어요",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "어느 품목의 수량인지 알 수 없는 숫자가 있음",
+    "포장박스: 수량이나 단위를 찾지 못함"
+   ]
+  },
+  {
+   "text": "비투건 다음 조화일 아니 수요일로 당겨졌어요",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "부자재 목록이나 프로젝트 목록에 있는 이름을 찾지 못함"
+   ]
+  },
+  {
+   "text": "4, 4, 2, 3박스 정도 남은 것 같아요",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "어림잡아 말함",
+    "부자재 목록이나 프로젝트 목록에 있는 이름을 찾지 못함"
+   ]
+  },
+  {
+   "text": "피원권 일주일 미뤄졌어요",
+   "records": [
+    {
+     "kind": "schedule_change",
+     "projectId": "P1",
+     "startDate": "2026-11-27"
+    }
+   ],
+   "needsReview": false,
+   "reasons": []
+  },
+  {
+   "text": "완충제 7공지 있습니다",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "부자재 목록이나 프로젝트 목록에 있는 이름을 찾지 못함"
+   ]
+  },
+  {
+   "text": "라벨 5놀쯤은 넣어주세요",
+   "records": [],
+   "needsReview": true,
+   "reasons": [
+    "보고가 아니라 부탁하는 말로 보임",
+    "어림잡아 말함",
+    "라벨: 수량이나 단위를 찾지 못함"
+   ]
+  }
+ ]
+}

@@ -16,7 +16,7 @@ export default async function EditProjectPage({ params }: { params: Promise<{ id
   const { id } = await params;
   const supabase = await createClient();
   const [{ data: project }, { data: products }, planData] = await Promise.all([
-    supabase.from("projects").select("id, name, product_id, production_qty, start_date, status, updated_at").eq("id", id).maybeSingle(),
+    supabase.from("projects").select("id, name, product_id, production_qty, start_date, status, updated_at, aliases").eq("id", id).maybeSingle(),
     supabase.from("products").select("id, name").order("id"),
     loadPlanData(supabase),
   ]);
@@ -51,6 +51,7 @@ export default async function EditProjectPage({ params }: { params: Promise<{ id
           production_qty: String(project.production_qty),
           start_date: project.start_date,
           status: project.status,
+          aliases: ((project.aliases as string[] | null) ?? []).join(", "),
         }}
       />
 

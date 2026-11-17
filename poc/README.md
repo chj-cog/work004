@@ -106,6 +106,8 @@ macOS·Linux에서는 `.venv/Scripts/python` 대신 `.venv/bin/python`을 쓴다
 .venv/Scripts/python web/server.py
 ```
 
+이 프로그램은 **웹 앱의 PC 도우미**이기도 하다. 켜 두면 웹 앱의 `받은 내용` 화면이 녹음을 이 PC에서 받아 적고 LLM으로 정리한다 (`/api/extract`). 허용한 웹 앱 주소에서 온 요청만 받는다.
+
 브라우저에서 `http://localhost:8765`를 연다. 규칙 방식과 비교표는 A만으로 되고, LLM 방식은 B, "녹음을 지금 받아 적어 실행"은 C가 필요하다.
 
 ### B. LLM으로 정리 (Ollama)

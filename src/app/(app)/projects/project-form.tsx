@@ -14,6 +14,7 @@ export interface ProjectFormValues {
   production_qty: string;
   start_date: string;
   status: string;
+  aliases: string;
 }
 
 const STATUS_OPTIONS = [
@@ -35,6 +36,9 @@ export function ProjectForm({ initial, products }: { initial: ProjectFormValues;
 
       <Field label="프로젝트명" name="name" error={e.name}>
         <input id="name" name="name" defaultValue={v.name} required className={inputClass} />
+      </Field>
+      <Field label="다르게 부르는 이름" name="aliases" error={e.aliases} hint="말·글로 받은 내용을 정리할 때 씁니다. 쉼표로 구분. 예: 피원, 1호기 건">
+        <input id="aliases" name="aliases" defaultValue={v.aliases} className={inputClass} />
       </Field>
       <Field label="제품" name="product_id" error={e.product_id} hint="한 프로젝트는 한 제품을 만듭니다.">
         <select id="product_id" name="product_id" defaultValue={v.product_id} required className={inputClass}>

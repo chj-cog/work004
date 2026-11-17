@@ -15,7 +15,7 @@ export default async function NewProjectPage() {
       <PageHeader title="프로젝트 추가" />
       <ProjectForm
         products={products ?? []}
-        initial={{ id: "", version: "", name: "", product_id: "", production_qty: "", start_date: "", status: "planned" }}
+        initial={{ id: "", version: "", name: "", product_id: "", production_qty: "", start_date: "", status: "planned", aliases: "" }}
       />
     </div>
   );

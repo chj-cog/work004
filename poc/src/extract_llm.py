@@ -39,8 +39,8 @@ def _item_lines(items: dict) -> str:
 def _project_lines(items: dict, scenario: dict) -> str:
     current = {p["id"]: p for p in scenario["projects"]}
     return "\n".join(
-        f"- {p['id']} (부르는 이름: {', '.join(p['aliases'])}) / 지금 생산시작일 {current[p['id']]['startDate']}, "
-        f"생산수량 {current[p['id']]['productionQty']}"
+        f"- {p['id']} (부르는 이름: {', '.join(p['aliases'])}) / 지금 생산시작일 {current[p['id']]['startDate']}"
+        + (f", 생산수량 {current[p['id']]['productionQty']}" if current[p['id']].get('productionQty') is not None else "")
         for p in items["projects"])
 
 
@@ -122,7 +122,49 @@ def _example(text: str, entries: list[dict]) -> str:
     return f"들은 말: {text}\n답: {json.dumps({'entries': entries}, ensure_ascii=False)}"
 
 
-def structured_prompt(items: dict, scenario: dict) -> str:
+def generic_examples(items: dict) -> list[str]:
+    """아무 품목 목록으로나 만들 수 있는 예시. 웹 앱의 실제 부자재·프로젝트로 정리할 때 쓴다
+    (PoC 측정에 쓴 예시는 가상의 부자재 4종에 맞춰 손으로 쓴 것이라 다른 목록에는 맞지 않는다)"""
+    def entry(evidence, kind, target="unknown", amounts=(), date=None, quantity=None):
+        return {"evidence": evidence, "type": kind, "target": target,
+                "amounts": [{"number": n, "unit": u} for n, u in amounts], "date": {**_NO_DATE, **(date or {})}, "quantity": quantity}
+
+    examples = []
+    packed = [m for m in items["materials"] if m["packs"]]
+    for m in packed[:1]:
+        name, pack = m["aliases"][-1], m["packs"][0]["unit"]
+        examples.append(_example(f"{name} 일곱 {pack} 반 있어요.", [entry(f"{name} 일곱 {pack} 반", "stock", m["id"], [(7.5, pack)])]))
+        examples.append(_example(f"{name} 여덟, 아니 여섯 {pack}요.", [entry(f"{name} 여덟, 아니 여섯 {pack}", "stock", m["id"], [(6, pack)])]))
+        examples.append(_example(f"{name} 네다섯 {pack}쯤 될 거예요.", [entry(f"네다섯 {pack}쯤", "unclear")]))
+        examples.append(_example(f"{name} 세 {pack} 발주 넣어 주세요.", [entry(f"{name} 세 {pack} 발주 넣어 주세요", "order_request")]))
+    for m in (packed[1:2] or packed[:1]):
+        name, pack, base = m["aliases"][0], m["packs"][0]["unit"], m["baseUnits"][0]
+        examples.append(_example(f"{name} 아홉 {pack}하고 낱개 열다섯 {base} 있어요.",
+                                 [entry(f"{name} 아홉 {pack}하고 낱개 열다섯 {base}", "stock", m["id"], [(9, pack), (15, base)])]))
+    for m in items["materials"][-1:]:
+        name, base = m["aliases"][0], m["baseUnits"][0]
+        examples.append(_example(f"{name} 삼백이십 {base} 남았고요.", [entry(f"{name} 삼백이십 {base}", "stock", m["id"], [(320, base)])]))
+        examples.append(_example(f"{name}은 다 떨어졌어요.", [entry(f"{name}은 다 떨어졌어요", "stock", m["id"], [(0, base)])]))
+    projects = items["projects"]
+    for p in projects[:1]:
+        name = p["aliases"][-1]
+        examples.append(_example(f"{name}은 십이월 구 일로 밀렸고 수량은 구십 개예요.",
+                                 [entry(f"{name}은 십이월 구 일로 밀렸고 수량은 구십 개", "schedule", p["id"],
+                                        date={"form": "month_day", "month": 12, "day": 9}, quantity=90)]))
+        examples.append(_example(f"{name} 건 다음 주 목요일로 당겨졌어요.",
+                                 [entry(f"{name} 건 다음 주 목요일로", "schedule", p["id"],
+                                        date={"form": "weekday", "week": "next", "weekday": "목"})]))
+    for p in (projects[1:2] or projects[:1]):
+        name = p["aliases"][0]
+        examples.append(_example(f"{name} 건 이십육 일로 바뀌었어요.",
+                                 [entry(f"{name} 건 이십육 일로", "schedule", p["id"], date={"form": "day", "day": 26})]))
+        examples.append(_example(f"{name} 건 삼 일 당겨졌어요.",
+                                 [entry(f"{name} 건 삼 일 당겨졌어요", "schedule", p["id"], date={"form": "shift", "shift_days": -3})]))
+    examples.append(_example("고무줄 두 봉지 남았어요.", [entry("고무줄", "unclear")]))
+    return examples
+
+
+def structured_prompt(items: dict, scenario: dict, custom_examples: list[str] | None = None) -> str:
     def stock(evidence, target, *amounts):
         return {"evidence": evidence, "type": "stock", "target": target,
                 "amounts": [{"number": n, "unit": u} for n, u in amounts], "date": _NO_DATE, "quantity": None}
@@ -150,6 +192,8 @@ def structured_prompt(items: dict, scenario: dict) -> str:
         _example("나사 네다섯 박스쯤 될 거예요.", [other("네다섯 박스쯤", "unclear")]),
         _example("고무줄 두 봉지 남았어요.", [other("고무줄", "unclear")]),
     ]
+    if custom_examples is not None:
+        examples = custom_examples
     today = scenario["today"]
     return f"""당신은 제조 현장의 부자재 담당자가 전화나 말로 들은 내용에서 필요한 값만 뽑아냅니다.
 들은 말은 음성을 받아 적은 글이라 오타가 있을 수 있습니다. 오늘은 {today} ({_weekday(today)}요일)입니다.
@@ -202,14 +246,15 @@ def call_ollama(model: str, system: str, user: str, fmt, timeout: float = 300) -
     raise AssertionError("unreachable")
 
 
-def extract(text: str, items: dict, scenario: dict, model: str, variant: str = "structured") -> dict:
+def extract(text: str, items: dict, scenario: dict, model: str, variant: str = "structured",
+            examples: list[str] | None = None) -> dict:
     """글 하나를 정리한다. 결과에 원래 응답(raw)과 걸린 시간(seconds)도 넣는다"""
     if not text.strip():
         return {"records": [], "needsReview": True, "reasons": ["받아 적은 글이 비어 있음"], "raw": "", "seconds": 0.0}
     if variant == "plain":
         system, fmt = plain_prompt(items, scenario), "json"
     elif variant in ("structured", "hybrid", "hybrid2"):
-        system, fmt = structured_prompt(items, scenario), structured_schema(items)
+        system, fmt = structured_prompt(items, scenario, examples), structured_schema(items)
     else:
         raise ValueError(f"모르는 방식: {variant}")
     shown = normalize_numbers(text) if variant in ("hybrid", "hybrid2") else text

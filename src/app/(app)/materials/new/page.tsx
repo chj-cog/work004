@@ -11,7 +11,7 @@ export default async function NewMaterialPage() {
       <PageHeader title="부자재 추가" />
       <MaterialForm
         mode="new"
-        initial={{ version: "", id: "", name: "", unit: "개", order_unit: "", moq: "", lead_time_bdays: "", stock_qty: "0" }}
+        initial={{ version: "", id: "", name: "", unit: "개", order_unit: "", moq: "", lead_time_bdays: "", stock_qty: "0", aliases: "", packs: "" }}
       />
     </div>
   );

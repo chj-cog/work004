@@ -15,6 +15,8 @@ export interface MaterialFormValues {
   moq: string;
   lead_time_bdays: string;
   stock_qty: string;
+  aliases: string;
+  packs: string;
 }
 
 export function MaterialForm({ initial, mode }: { initial: MaterialFormValues; mode: "new" | "edit" }) {
@@ -54,6 +56,16 @@ export function MaterialForm({ initial, mode }: { initial: MaterialFormValues; m
           <input id="stock_qty" name="stock_qty" inputMode="decimal" defaultValue={v.stock_qty} className={inputClass} />
         </Field>
       </div>
+
+      <fieldset className="space-y-4 rounded border border-slate-200 p-3">
+        <legend className="px-1 text-sm font-medium">말·글로 받은 내용을 정리할 때 쓰는 정보</legend>
+        <Field label="다르게 부르는 이름" name="aliases" error={e.aliases} hint="쉼표로 구분. 예: 스크류, 볼트">
+          <input id="aliases" name="aliases" defaultValue={v.aliases} className={inputClass} />
+        </Field>
+        <Field label="포장 단위" name="packs" error={e.packs} hint="'이름=낱개 수'를 쉼표로 구분. 예: 박스=800, 봉지=100">
+          <input id="packs" name="packs" defaultValue={v.packs} className={inputClass} />
+        </Field>
+      </fieldset>
 
       <FormMessage state={state} />
       <div className="flex items-center gap-3">

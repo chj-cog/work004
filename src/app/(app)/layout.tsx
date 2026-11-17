@@ -5,6 +5,7 @@ import { signOut } from "../login/actions";
 
 const NAV = [
   { href: "/", label: "발주 체크리스트" },
+  { href: "/intake", label: "받은 내용" },
   { href: "/schedule", label: "일정 보기" },
   { href: "/projects", label: "프로젝트" },
   { href: "/materials", label: "부자재" },

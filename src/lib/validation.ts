@@ -59,6 +59,32 @@ export interface MaterialInput {
   moq: number | null;
   lead_time_bdays: number;
   stock_qty: number;
+  /** 다르게 부르는 이름. 입력 화면에서만 온다 (엑셀 가져오기에는 없어서 기존 값을 건드리지 않는다) */
+  aliases?: string[];
+  /** 포장 단위: [{ unit: "박스", qty: 800 }] */
+  packs?: { unit: string; qty: number }[];
+}
+
+/** "스크류, 볼트" → ["스크류", "볼트"] */
+export function parseNameList(value: string): string[] {
+  return [...new Set(value.split(/[,\n]/).map((v) => v.trim()).filter(Boolean))];
+}
+
+/** "박스=800, 묶음=50" → [{unit:"박스",qty:800},{unit:"묶음",qty:50}]. 읽을 수 없으면 null */
+export function parsePackList(value: string): { unit: string; qty: number }[] | null {
+  const packs: { unit: string; qty: number }[] = [];
+  for (const part of value.split(/[,\n]/).map((v) => v.trim()).filter(Boolean)) {
+    const m = /^(?:1\s*)?([^\d\s=:]+)\s*[=:]\s*([\d,.]+)\s*\S*$/.exec(part);
+    const unit = m?.[1] ?? "";
+    const qty = toNumber((m?.[2] ?? "").replaceAll(",", ""));
+    if (!unit || qty === null || !(qty > 0) || packs.some((p) => p.unit === unit)) return null;
+    packs.push({ unit, qty });
+  }
+  return packs;
+}
+
+export function formatPackList(packs: { unit: string; qty: number }[]): string {
+  return packs.map((p) => `${p.unit}=${p.qty}`).join(", ");
 }
 
 export function parseMaterial(fd: Source): Parsed<MaterialInput> {
@@ -80,7 +106,16 @@ export function parseMaterial(fd: Source): Parsed<MaterialInput> {
   }
   if (!(stock >= 0)) errors.stock_qty = "현재 재고는 0 이상의 숫자여야 합니다.";
 
-  return finish({ id, name, unit, order_unit: orderUnit!, moq, lead_time_bdays: leadTime!, stock_qty: stock }, errors);
+  const data: MaterialInput = { id, name, unit, order_unit: orderUnit!, moq, lead_time_bdays: leadTime!, stock_qty: stock };
+  if (fd.get("aliases") != null) data.aliases = parseNameList(text(fd, "aliases")).filter((a) => a !== name);
+  if (fd.get("packs") != null) {
+    const packs = parsePackList(text(fd, "packs"));
+    if (packs === null) errors.packs = "포장 단위는 '박스=800, 묶음=50'처럼 '이름=낱개 수'로 적고, 같은 이름을 두 번 쓰지 마세요.";
+    else if (packs.some((p) => p.unit === unit)) errors.packs = "포장 단위 이름이 낱개 단위와 같습니다.";
+    else data.packs = packs;
+  }
+
+  return finish(data, errors);
 }
 
 export const PROJECT_STATUSES = ["planned", "in_progress", "done", "cancelled"] as const;
@@ -92,6 +127,7 @@ export interface ProjectInput {
   production_qty: number;
   start_date: string;
   status: ProjectStatusValue;
+  aliases?: string[];
 }
 
 export function parseProject(fd: Source): Parsed<ProjectInput> {
@@ -108,7 +144,10 @@ export function parseProject(fd: Source): Parsed<ProjectInput> {
   if (!isValidISODate(startDate)) errors.start_date = "생산시작일을 선택하세요.";
   if (!PROJECT_STATUSES.includes(status)) errors.status = "상태를 선택하세요.";
 
-  return finish({ name, product_id: productId, production_qty: qty!, start_date: startDate, status }, errors);
+  const data: ProjectInput = { name, product_id: productId, production_qty: qty!, start_date: startDate, status };
+  if (fd.get("aliases") != null) data.aliases = parseNameList(text(fd, "aliases")).filter((a) => a !== name);
+
+  return finish(data, errors);
 }
 
 export interface ProductInput {

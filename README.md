@@ -21,7 +21,7 @@
 ## 처음 설정
 
 1. [Supabase](https://supabase.com)에서 프로젝트를 만듭니다. 리전은 **Northeast Asia (Seoul)**.
-2. SQL Editor에서 `supabase/migrations/`의 파일을 번호 순서대로 실행합니다 (`0001_init.sql`, `0002_import.sql`, `0003_signup_approval.sql`). 개발용 예시 데이터가 필요하면 `supabase/seed.sql`도 실행합니다.
+2. SQL Editor에서 `supabase/migrations/`의 파일을 번호 순서대로 실행합니다 (`0001_init.sql`, `0002_import.sql`, `0003_signup_approval.sql`, `0004_intake.sql`). 개발용 예시 데이터가 필요하면 `supabase/seed.sql`도 실행합니다.
 3. Authentication → Sign In / Providers → Email에서 **Allow new users to sign up을 켭니다.** 가입은 누구나 할 수 있지만, 관리자가 팀원 화면에서 승인해야 데이터를 볼 수 있습니다.
    - **Confirm email**: Supabase 기본 메일 서버는 한 시간에 보낼 수 있는 메일 수가 적습니다. 별도 메일 서버(SMTP)를 연결하기 전까지는 끄는 것을 권장합니다. 켜 두면 가입할 때마다 확인 메일이 나갑니다.
 4. Authentication → URL Configuration에서 Site URL을 앱 주소로, Redirect URLs에 `http://localhost:3000/auth/callback`과 배포 주소의 `/auth/callback`을 추가합니다 (가입 확인 메일용).
@@ -38,6 +38,25 @@ npm run dev
 ```
 
 http://localhost:3000 에서 회원가입 후 로그인합니다. 이후 가입한 팀원은 관리자가 **팀원** 화면에서 승인합니다.
+
+## 받은 내용 (말·글 → 재고·일정)
+
+`받은 내용` 화면에서 말이나 글로 받은 재고·일정 변경을 정리하고, 사람이 확인해서 확정하면 재고와 생산일정에 반영됩니다.
+
+1. **준비**: 부자재 화면에서 "다르게 부르는 이름"(스크류, 뽁뽁이)과 "포장 단위"(박스=800)를 넣습니다. 프로젝트에도 부르는 이름을 넣을 수 있습니다.
+2. **넣기**: 글을 붙여 넣거나, 녹음하거나, 녹음 파일을 올립니다.
+3. **확인**: 원래 말, 정리 결과, 확정하면 달라지는 발주가 나란히 나옵니다. 틀린 곳은 고칩니다. "확인 필요"가 붙은 것은 이유를 보고 직접 채웁니다.
+4. **확정** 또는 **버리기**: 확정해야 반영됩니다. 누가 무엇을 근거로 바꿨는지 기록이 남습니다.
+
+| 넣는 방법 | 정리하는 곳 | 필요한 것 |
+|---|---|---|
+| 글 | 웹 앱 (규칙) | 없음. 어디서나 됩니다 |
+| 글 (LLM) | 이 PC의 도우미 | PC 도우미 |
+| 녹음, 녹음 파일 | 이 PC의 도우미 (Whisper + LLM) | PC 도우미 |
+
+**PC 도우미**는 Whisper와 LLM을 이 PC에서 돌리는 작은 프로그램입니다. 음성은 PC 밖으로 나가지 않습니다. 켜는 방법은 [poc/README.md](poc/README.md)의 "브라우저에서 보기"와 같습니다 (`poc` 폴더에서 `.venv/Scripts/python web/server.py`). 도우미가 켜진 PC의 브라우저에서 웹 앱을 열면 화면에 "PC 도우미 연결됨"이 표시됩니다.
+
+정리 정확도는 PoC에서 73%였습니다 ([docs/evaluation.md](docs/evaluation.md)). 그래서 자동으로 반영하지 않고 반드시 사람이 확인합니다.
 
 ## 명령
 

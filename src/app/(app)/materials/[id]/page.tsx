@@ -3,6 +3,8 @@ import { requireUser } from "@/lib/auth";
 import { createClient } from "@/lib/supabase/server";
 import { DeleteButton } from "@/components/form";
 import { PageHeader } from "@/components/placeholder";
+import { parsePacks } from "@/lib/intake/types";
+import { formatPackList } from "@/lib/validation";
 import { deleteMaterial } from "../actions";
 import { MaterialForm } from "../material-form";
 
@@ -14,7 +16,7 @@ export default async function EditMaterialPage({ params }: { params: Promise<{ i
   const supabase = await createClient();
   const { data: m } = await supabase
     .from("materials")
-    .select("id, name, unit, order_unit, moq, lead_time_bdays, stock_qty, updated_at")
+    .select("id, name, unit, order_unit, moq, lead_time_bdays, stock_qty, updated_at, aliases, packs")
     .eq("id", id)
     .maybeSingle();
   if (!m) notFound();
@@ -40,6 +42,8 @@ export default async function EditMaterialPage({ params }: { params: Promise<{ i
           moq: m.moq === null ? "" : String(m.moq),
           lead_time_bdays: String(m.lead_time_bdays),
           stock_qty: String(m.stock_qty),
+          aliases: ((m.aliases as string[] | null) ?? []).join(", "),
+          packs: formatPackList(parsePacks(m.packs)),
         }}
       />
     </div>
