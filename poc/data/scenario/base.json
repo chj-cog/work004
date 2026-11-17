@@ -1,0 +1,24 @@
+{
+  "_comment": "가상의 예시 데이터 (PRD §4.1, §6.5와 같은 숫자). 사내 수치가 아니다.",
+  "today": "2026-11-03",
+  "materials": [
+    { "id": "A", "name": "나사", "orderUnit": 800, "moq": null, "leadTimeBdays": 6, "stockQty": 500 },
+    { "id": "B", "name": "포장박스", "orderUnit": 1500, "moq": null, "leadTimeBdays": 11, "stockQty": 0 },
+    { "id": "C", "name": "라벨", "orderUnit": 1000, "moq": null, "leadTimeBdays": 8, "stockQty": 0 },
+    { "id": "D", "name": "완충재", "orderUnit": 500, "moq": 2000, "leadTimeBdays": 6, "stockQty": 0 }
+  ],
+  "bomItems": [
+    { "productId": "X", "materialId": "A", "qtyPerUnit": 17 },
+    { "productId": "X", "materialId": "B", "qtyPerUnit": 13 },
+    { "productId": "X", "materialId": "C", "qtyPerUnit": 15 },
+    { "productId": "X", "materialId": "D", "qtyPerUnit": 7 },
+    { "productId": "Y", "materialId": "A", "qtyPerUnit": 9 },
+    { "productId": "Y", "materialId": "C", "qtyPerUnit": 11 }
+  ],
+  "projects": [
+    { "id": "P1", "name": "P1", "productId": "X", "productionQty": 100, "startDate": "2026-11-20", "status": "planned" },
+    { "id": "P2", "name": "P2", "productId": "Y", "productionQty": 100, "startDate": "2026-11-24", "status": "planned" }
+  ],
+  "holidays": [],
+  "openOrders": []
+}
