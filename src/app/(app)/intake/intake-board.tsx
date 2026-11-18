@@ -5,6 +5,7 @@ import { useEffect, useMemo, useRef, useState, useTransition } from "react";
 import { calculatePlan, type PlanInput } from "@/engine";
 import { inputClass } from "@/components/form";
 import { formatDate, formatQty } from "@/lib/dates";
+import { transcribeInBrowser } from "@/lib/intake/browser-stt";
 import { applyToPlanInput, diffOrders, validateRecords, type IntakeContext, type IntakeItems, type IntakeRecord } from "@/lib/intake/types";
 import { confirmIntake, createFromHelper, createFromText, discardIntake } from "./actions";
 
@@ -47,7 +48,8 @@ const fromDraft = (d: Draft) =>
     : { kind: d.kind, projectId: d.projectId, startDate: d.startDate, productionQty: d.productionQty };
 
 const when = (iso: string) => new Date(iso).toLocaleString("ko-KR", { timeZone: "Asia/Seoul", month: "numeric", day: "numeric", hour: "2-digit", minute: "2-digit" });
-const methodLabel = (m: string) => (m === "rules" ? "규칙으로 정리" : `LLM으로 정리 (${m})`);
+const methodLabel = (m: string) =>
+  m === "rules" ? "규칙으로 정리" : m.startsWith("browser-whisper") ? "브라우저에서 받아 적고 규칙으로 정리" : `LLM으로 정리 (${m})`;
 const button = "rounded border border-slate-300 bg-white px-3 py-1.5 text-sm disabled:opacity-50";
 const primary = "rounded bg-slate-900 px-3 py-1.5 text-sm text-white disabled:opacity-50";
 
@@ -141,9 +143,20 @@ function NewIntake({ items, context }: { items: IntakeItems; context: IntakeCont
 
   async function submitAudio(blob: Blob) {
     if (blob.size > 15 * 1024 * 1024) return setMessage({ ok: false, text: "녹음이 너무 큽니다 (15MB 이하)." });
-    setBusy("받아 적고 정리하는 중… 처음에는 1분쯤 걸립니다.");
     setMessage(null);
     try {
+      if (helper !== "on") {
+        // PC 도우미가 없으면 이 브라우저 안에서 받아 적는다 (음성은 이 기기 밖으로 나가지 않는다)
+        setBusy("모델을 준비하는 중… 처음에는 한 번 내려받습니다 (약 250MB).");
+        const stt = await transcribeInBrowser(blob, (p) =>
+          setBusy(p.stage === "download" ? `모델을 내려받는 중… ${p.percent ?? 0}% (처음 한 번만)` : `받아 적는 중… (${p.device})`),
+        );
+        if (!stt.text) throw new Error("받아 적은 글이 비어 있습니다. 더 또렷하게, 마이크에 가까이 말해 보세요.");
+        setBusy("정리하는 중…");
+        finish(await createFromText(stt.text, true), `받아 적고(${stt.seconds}초) 정리해서 아래 '확인할 것'에 올렸습니다.`);
+        return;
+      }
+      setBusy("받아 적고 정리하는 중… 처음에는 1분쯤 걸립니다.");
       const bytes = new Uint8Array(await blob.arrayBuffer());
       let binary = "";
       for (let i = 0; i < bytes.length; i += 0x8000) binary += String.fromCharCode(...bytes.subarray(i, i + 0x8000));
@@ -200,17 +213,17 @@ function NewIntake({ items, context }: { items: IntakeItems; context: IntakeCont
         <button type="button" onClick={submitText} disabled={Boolean(busy) || recording} className={primary}>
           글 정리해서 올리기
         </button>
-        <button type="button" onClick={toggleRecording} disabled={!on || Boolean(busy)} className={button}>
+        <button type="button" onClick={toggleRecording} disabled={Boolean(busy) || helper === "checking"} className={button}>
           {recording ? "■ 녹음 끝내고 올리기" : "● 녹음하기"}
         </button>
-        <label className={`${button} ${!on || busy || recording ? "pointer-events-none opacity-50" : "cursor-pointer"}`}>
+        <label className={`${button} ${busy || recording || helper === "checking" ? "pointer-events-none opacity-50" : "cursor-pointer"}`}>
           녹음 파일 올리기
           <input
             ref={fileInput}
             type="file"
             accept="audio/*,.m4a,.3gp"
             className="sr-only"
-            disabled={!on || Boolean(busy) || recording}
+            disabled={Boolean(busy) || recording || helper === "checking"}
             onChange={(e) => e.target.files?.[0] && void submitAudio(e.target.files[0])}
           />
         </label>
@@ -224,7 +237,7 @@ function NewIntake({ items, context }: { items: IntakeItems; context: IntakeCont
         {helper === "checking" && "PC 도우미를 찾는 중…"}
         {on && "PC 도우미 연결됨 — 녹음을 받아 적고(Whisper) LLM으로 정리합니다. 음성은 이 PC 밖으로 나가지 않습니다."}
         {helper === "off" &&
-          "PC 도우미가 꺼져 있습니다. 글은 규칙으로 정리되고, 녹음은 쓸 수 없습니다. 녹음을 쓰려면 이 PC에서 poc 폴더의 '.venv/Scripts/python web/server.py'를 실행하세요."}
+          "녹음은 이 브라우저 안에서 받아 적습니다(처음 한 번 모델 약 250MB를 내려받음). 음성은 이 기기 밖으로 나가지 않지만, PC 도우미를 켠 PC보다 덜 정확해서 항상 '확인 필요'로 올라옵니다."}
       </p>
       {busy && <p className="mt-2 text-sm text-slate-600">{busy}</p>}
       {message && <p className={`mt-2 text-sm ${message.ok ? "text-emerald-700" : "text-red-600"}`}>{message.text}</p>}

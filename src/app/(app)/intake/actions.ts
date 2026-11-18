@@ -14,8 +14,12 @@ export interface IntakeResult {
 
 const MAX_TEXT = 2000;
 
-/** 글을 규칙으로 정리해서 확인함에 올린다 */
-export async function createFromText(text: string): Promise<IntakeResult> {
+/**
+ * 글을 규칙으로 정리해서 확인함에 올린다.
+ * fromBrowserAudio: 쓰는 사람의 브라우저가 녹음을 받아 적은 글이다. 이 방식은 정확도가 낮아
+ * (PoC에서 같은 크기 모델의 핵심어 인식률 67%) 맞게 읽힌 것처럼 보여도 틀릴 수 있으므로 항상 "확인 필요"를 붙인다.
+ */
+export async function createFromText(text: string, fromBrowserAudio = false): Promise<IntakeResult> {
   const user = await requireUser();
   const original = String(text ?? "").trim().slice(0, MAX_TEXT);
   if (!original) return { ok: false, message: "정리할 글을 넣어 주세요." };
@@ -23,9 +27,13 @@ export async function createFromText(text: string): Promise<IntakeResult> {
   try {
     const { items, context } = await loadIntakeItems(supabase);
     const result = extractByRules(original, items, context);
+    const reasons = fromBrowserAudio
+      ? ["브라우저에서 받아 적은 글입니다. 품목 이름과 숫자가 틀리기 쉬우니 위의 글을 들은 말과 꼭 맞춰 보세요.", ...result.reasons]
+      : result.reasons;
     const { error } = await supabase.from("intake_items").insert({
-      source: "text", original_text: original, method: "rules",
-      records: result.records, needs_review: result.needsReview, reasons: result.reasons, created_by: user.id,
+      source: fromBrowserAudio ? "audio" : "text", original_text: original,
+      method: fromBrowserAudio ? "browser-whisper-small+rules" : "rules",
+      records: result.records, needs_review: result.needsReview || fromBrowserAudio, reasons, created_by: user.id,
     });
     if (error) return { ok: false, message: dbMessage(error) };
   } catch (error) {
